@@ -23,7 +23,7 @@
     <div class="nav-dropdown">
       <a href="#reels" class="nav-dropdown__trigger i18n" data-en="Reels">Reels <span class="nav-dropdown__caret">▾</span></a>
       <div class="nav-dropdown__menu">
-        <a href="#reel" class="i18n" data-en="Rigging">Rigging</a>
+        <a href="#reel" class="i18n open-reel-modal" data-en="Rigging">Rigging</a>
         <a href="#reels" data-tab="scripting">Scripting</a>
         <a href="#reels" data-tab="mocap" class="i18n" data-en="Motion Capture">Motion Capture</a>
       </div>
@@ -60,7 +60,7 @@
     <p class="hero__alias">Antonio Mexicano</p>
     <h2 class="hero__title">Creative Producer <span class="hero__dot">·</span> VFX Supervisor <span class="hero__dot">·</span> Rigging TD</h2>
     <p class="hero__tagline i18n" data-en="10+ years bringing characters to life across film, TV, games, and virtual production — from the first meeting to the final render.">10+ años dando vida a personajes en cine, TV, videojuegos y virtual production — de la primera junta al render final.</p>
-    <a href="#reel" class="btn btn--primary">
+    <a href="#reel" class="btn btn--primary open-reel-modal">
       <span class="btn__icon">▶</span> <span class="i18n" data-en="Watch Reel">Ver Reel</span>
     </a>
   </div>
@@ -367,6 +367,16 @@
     <span class="i18n" data-en="Designed and built by Anton Ray">Diseñado y construido por Anton Ray</span>
   </div>
 </footer>
+
+<!-- Reel modal — ventana sobrepuesta para "Ver Reel" (hero) y "Rigging"
+     (menú Reels), en vez de bajar hasta la sección #reel -->
+<div class="reel-modal" id="reel-modal">
+  <div class="reel-modal__backdrop" id="reel-modal-backdrop"></div>
+  <div class="reel-modal__frame">
+    <button class="reel-modal__close" id="reel-modal-close" type="button" aria-label="Cerrar">✕</button>
+    <div class="reel-modal__video" id="reel-modal-video"></div>
+  </div>
+</div>
 
 <!-- Embed oficial de Gumroad — convierte los <div class="gumroad-product-embed">
      que agrega script.js (desde products.js) en la vista previa real del

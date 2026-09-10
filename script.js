@@ -30,6 +30,49 @@ document.addEventListener('DOMContentLoaded', () => {
     reelIframe.src = `https://www.youtube.com/embed/${VIDEOS.reel.id}?rel=0`;
   }
 
+  // Reel modal — "Ver Reel" (hero) y "Rigging" (menú Reels) abren el demo
+  // reel en una ventana sobrepuesta en vez de bajar hasta la sección #reel.
+  // Mismo truco de mute+autoplay que los shorts, para que funcione parejo
+  // en iOS desde el primer tap.
+  const reelModal = document.getElementById('reel-modal');
+  const reelModalVideo = document.getElementById('reel-modal-video');
+  const reelModalClose = document.getElementById('reel-modal-close');
+  const reelModalBackdrop = document.getElementById('reel-modal-backdrop');
+
+  function openReelModal() {
+    if (!reelModal || !reelModalVideo || !hasVideos || !VIDEOS.reel || !VIDEOS.reel.id) return;
+    reelModalVideo.innerHTML = '';
+    const iframe = document.createElement('iframe');
+    iframe.src = `https://www.youtube.com/embed/${VIDEOS.reel.id}?autoplay=1&mute=1&rel=0&playsinline=1`;
+    iframe.title = 'Anton Ray — Demo Reel';
+    iframe.setAttribute('frameborder', '0');
+    iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+    iframe.setAttribute('allowfullscreen', '');
+    reelModalVideo.appendChild(iframe);
+    reelModal.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeReelModal() {
+    if (reelModalVideo) reelModalVideo.innerHTML = '';
+    reelModal?.classList.remove('is-open');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.open-reel-modal').forEach((link) => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      openReelModal();
+      closeMobileNav();
+    });
+  });
+
+  reelModalClose?.addEventListener('click', closeReelModal);
+  reelModalBackdrop?.addEventListener('click', closeReelModal);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && reelModal?.classList.contains('is-open')) closeReelModal();
+  });
+
   // Reel opcional por pestaña dentro de la sección Reels
   if (hasVideos && VIDEOS.reels) {
     Object.keys(VIDEOS.reels).forEach((tabName) => {
@@ -383,6 +426,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- Smooth-scroll for in-page nav links ---
   document.querySelectorAll('a[href^="#"]').forEach((link) => {
+    if (link.classList.contains('open-reel-modal')) return; // handled by the reel modal
     if (link.closest('.nav-dropdown__menu') && link.dataset.tab) return; // handled above
     link.addEventListener('click', (e) => {
       const targetId = link.getAttribute('href');
