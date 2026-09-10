@@ -24,12 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
     console.warn('videos.js no se cargó — revisa que esté antes de script.js en index.html');
   }
 
-  // Reel principal (sección #reel)
-  const reelIframe = document.getElementById('reel-iframe');
-  if (reelIframe && hasVideos && VIDEOS.reel && VIDEOS.reel.id) {
-    reelIframe.src = `https://www.youtube.com/embed/${VIDEOS.reel.id}?rel=0`;
-  }
-
   // Reel modal — "Ver Reel" (hero) y "Rigging" (menú Reels) abren el demo
   // reel en una ventana sobrepuesta en vez de bajar hasta la sección #reel.
   // Mismo truco de mute+autoplay que los shorts, para que funcione parejo
@@ -237,11 +231,11 @@ document.addEventListener('DOMContentLoaded', () => {
   try { savedLang = localStorage.getItem('antonray-lang') || 'es'; } catch (e) { /* storage unavailable, ignore */ }
   if (savedLang === 'en') setLanguage('en');
 
-  // --- Reels dropdown: jump to a specific tab from the nav ---
-  // "Rigging" links straight to the demo reel section (it's a plain #reel
-  // link with no data-tab), so it falls through to the generic smooth-scroll
-  // handler below instead of being caught here.
-  document.querySelectorAll('.nav-dropdown__menu a[data-tab]').forEach((link) => {
+  // --- Jump to a specific Reels tab (nav dropdown + hero quicklinks) ---
+  // "Rigging" in the nav dropdown opens the demo reel modal instead (it's a
+  // plain #reel link with no data-tab), so it falls through to the generic
+  // smooth-scroll handler below instead of being caught here.
+  document.querySelectorAll('a[data-tab]').forEach((link) => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
       activateTab(link.dataset.tab);
