@@ -152,16 +152,17 @@ document.addEventListener('DOMContentLoaded', () => {
     marquee.addEventListener('wheel', pauseAutoTemporarily, { passive: true });
     marquee.addEventListener('scroll', wrapScroll, { passive: true });
 
-    // Drag-to-scroll
-    marquee.addEventListener('pointerdown', (e) => {
+    // Drag-to-scroll — plain mouse events, no pointer capture (capture can
+    // swallow the click on the button underneath in some browsers, which
+    // was blocking the "play" click entirely).
+    marquee.addEventListener('mousedown', (e) => {
       isPointerDown = true;
       startX = e.clientX;
       startScroll = marquee.scrollLeft;
       marquee.classList.add('is-grabbing');
-      marquee.setPointerCapture(e.pointerId);
     });
 
-    marquee.addEventListener('pointermove', (e) => {
+    window.addEventListener('mousemove', (e) => {
       if (!isPointerDown) return;
       const delta = e.clientX - startX;
       marquee.scrollLeft = startScroll - delta;
@@ -178,8 +179,22 @@ document.addEventListener('DOMContentLoaded', () => {
       wasDragging = dragDistance > 8;
       pauseAutoTemporarily();
     }
-    marquee.addEventListener('pointerup', endDrag);
-    marquee.addEventListener('pointercancel', endDrag);
+    window.addEventListener('mouseup', endDrag);
+
+    // Touch devices already get native horizontal scrolling for free
+    // (overflow-x: auto), so touch just needs the same drag-distance check
+    // to avoid a swipe-to-scroll accidentally triggering playback.
+    marquee.addEventListener('touchstart', (e) => {
+      const t = e.touches[0];
+      isPointerDown = true;
+      startX = t.clientX;
+      startScroll = marquee.scrollLeft;
+    }, { passive: true });
+    marquee.addEventListener('touchmove', () => {
+      // native scrolling handles the movement; endDrag() below still runs
+      // on touchend and measures scrollLeft to decide wasDragging.
+    }, { passive: true });
+    marquee.addEventListener('touchend', endDrag);
 
     // Arrow buttons
     const step = 258; // card width (240) + gap (18)
