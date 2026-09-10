@@ -49,6 +49,20 @@ const VIDEOS = {
     scripting: "RCbAVlhtBRE", // https://youtu.be/RCbAVlhtBRE
     mocap: "DXeYSTxG2D0",     // https://youtu.be/DXeYSTxG2D0
     clientes: "6M0dyRBKo3w"   // https://youtu.be/6M0dyRBKo3w — reel de spots publicitarios
+  },
+
+  // ---- Breakdowns por pestaña (sección "Reels", opcional) -----
+  // Tira horizontal de miniaturas que aparece DEBAJO de las tarjetas
+  // de esa pestaña — nunca arriba, para que el demo principal siga
+  // siendo lo primero que se ve. Si la lista está vacía, la tira ni
+  // siquiera aparece (no ocupa espacio).
+  //
+  // Agrega tantos ids como quieras por pestaña; se abren en la misma
+  // ventana modal que "Ver Reel" al hacerles clic.
+  breakdowns: {
+    rigging: [],
+    scripting: [],
+    mocap: []
   }
 
 };

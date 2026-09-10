@@ -33,11 +33,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const reelModalClose = document.getElementById('reel-modal-close');
   const reelModalBackdrop = document.getElementById('reel-modal-backdrop');
 
-  function openReelModal() {
-    if (!reelModal || !reelModalVideo || !hasVideos || !VIDEOS.reel || !VIDEOS.reel.id) return;
+  function openReelModal(videoId) {
+    // Sin id explícito, cae al reel principal — así los links de "Ver Reel"
+    // siguen funcionando igual que antes de que esto aceptara un parámetro.
+    const id = videoId || (hasVideos && VIDEOS.reel && VIDEOS.reel.id);
+    if (!reelModal || !reelModalVideo || !id) return;
     reelModalVideo.innerHTML = '';
     const iframe = document.createElement('iframe');
-    iframe.src = `https://www.youtube.com/embed/${VIDEOS.reel.id}?autoplay=1&mute=1&rel=0&playsinline=1`;
+    iframe.src = `https://www.youtube.com/embed/${id}?autoplay=1&mute=1&rel=0&playsinline=1`;
     iframe.title = 'Anton Ray — Demo Reel';
     iframe.setAttribute('frameborder', '0');
     iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
@@ -81,6 +84,32 @@ document.addEventListener('DOMContentLoaded', () => {
       iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
       iframe.setAttribute('allowfullscreen', '');
       container.appendChild(iframe);
+    });
+  }
+
+  // Breakdowns opcionales por pestaña — tira horizontal chiquita debajo de
+  // las tarjetas de esa pestaña (videos.js -> VIDEOS.breakdowns). Si la
+  // lista viene vacía, la tira se queda oculta (hidden) en vez de mostrar
+  // un espacio en blanco — así el demo principal sigue siendo lo primero
+  // que se ve al entrar a una pestaña.
+  if (hasVideos && VIDEOS.breakdowns) {
+    Object.keys(VIDEOS.breakdowns).forEach((tabName) => {
+      const ids = (VIDEOS.breakdowns[tabName] || []).filter(Boolean);
+      const strip = document.getElementById(`breakdown-strip-${tabName}`);
+      const track = document.getElementById(`breakdown-${tabName}`);
+      if (!strip || !track || ids.length === 0) return;
+
+      track.innerHTML = ids.map((id) => `
+        <button class="breakdown-card" type="button" data-video-id="${id}">
+          <img src="https://img.youtube.com/vi/${id}/hqdefault.jpg" alt="Breakdown" loading="lazy">
+          <span class="breakdown-card__play">▶</span>
+        </button>`).join('');
+
+      track.querySelectorAll('.breakdown-card').forEach((card) => {
+        card.addEventListener('click', () => openReelModal(card.dataset.videoId));
+      });
+
+      strip.hidden = false;
     });
   }
 
