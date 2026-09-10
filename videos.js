@@ -52,17 +52,24 @@ const VIDEOS = {
   },
 
   // ---- Breakdowns por pestaña (sección "Reels", opcional) -----
-  // Tira horizontal de miniaturas que aparece DEBAJO de las tarjetas
-  // de esa pestaña — nunca arriba, para que el demo principal siga
-  // siendo lo primero que se ve. Si la lista está vacía, la tira ni
-  // siquiera aparece (no ocupa espacio).
+  // Aparecen como tarjetas dentro de la misma cuadrícula que "Cascade
+  // Rig System", "ikStretchyLeg", etc. (mismo tamaño, con miniatura y
+  // botón de play). Al hacerles clic, el video se reproduce ARRIBA, en
+  // el mismo reproductor del demo principal de esa pestaña — no abren
+  // ventana aparte. Si la lista está vacía no aparece ninguna tarjeta
+  // extra.
   //
-  // Agrega tantos ids como quieras por pestaña; se abren en la misma
-  // ventana modal que "Ver Reel" al hacerles clic.
+  // "title" es opcional — si lo dejas vacío, la tarjeta dice "Breakdown".
   breakdowns: {
-    rigging: [],
-    scripting: [],
-    mocap: []
+    rigging: [
+      // { id: "idDelVideo", title: "Cascade Rig — Breakdown" },
+    ],
+    scripting: [
+      // { id: "idDelVideo", title: "myTools — Breakdown" },
+    ],
+    mocap: [
+      // { id: "idDelVideo", title: "FaceClean — Breakdown" },
+    ]
   }
 
 };

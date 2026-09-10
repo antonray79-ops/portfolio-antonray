@@ -87,29 +87,52 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Breakdowns opcionales por pestaña — tira horizontal chiquita debajo de
-  // las tarjetas de esa pestaña (videos.js -> VIDEOS.breakdowns). Si la
-  // lista viene vacía, la tira se queda oculta (hidden) en vez de mostrar
-  // un espacio en blanco — así el demo principal sigue siendo lo primero
-  // que se ve al entrar a una pestaña.
+  // Breakdowns opcionales por pestaña (videos.js -> VIDEOS.breakdowns) —
+  // se agregan como tarjetas dentro de la MISMA cuadrícula que "Cascade
+  // Rig System" etc. (con miniatura en vez de descripción). Al hacerles
+  // clic, el video se reproduce ARRIBA, en el mini-reel principal de esa
+  // pestaña — nunca en ventana aparte, y el demo principal sigue siendo
+  // lo primero que se ve al entrar a la pestaña.
   if (hasVideos && VIDEOS.breakdowns) {
+    const escapeAttr = (str) => String(str || '').replace(/"/g, '&quot;');
+
     Object.keys(VIDEOS.breakdowns).forEach((tabName) => {
-      const ids = (VIDEOS.breakdowns[tabName] || []).filter(Boolean);
-      const strip = document.getElementById(`breakdown-strip-${tabName}`);
-      const track = document.getElementById(`breakdown-${tabName}`);
-      if (!strip || !track || ids.length === 0) return;
+      const items = (VIDEOS.breakdowns[tabName] || []).filter((b) => b && b.id);
+      const grid = document.querySelector(`#panel-${tabName} .work-grid`);
+      const miniReel = document.getElementById(`reel-${tabName}`);
+      if (!grid || items.length === 0) return;
 
-      track.innerHTML = ids.map((id) => `
-        <button class="breakdown-card" type="button" data-video-id="${id}">
-          <img src="https://img.youtube.com/vi/${id}/hqdefault.jpg" alt="Breakdown" loading="lazy">
-          <span class="breakdown-card__play">▶</span>
-        </button>`).join('');
+      items.forEach((item, i) => {
+        const label = item.title || `Breakdown ${i + 1}`;
+        const card = document.createElement('button');
+        card.type = 'button';
+        card.className = 'work-card work-card--video';
+        card.dataset.videoId = item.id;
+        card.innerHTML = `
+          <div class="work-card__video-thumb">
+            <img src="https://img.youtube.com/vi/${item.id}/hqdefault.jpg" alt="${escapeAttr(label)}" loading="lazy">
+            <span class="work-card__play">▶</span>
+          </div>
+          <h3>${escapeAttr(label)}</h3>`;
 
-      track.querySelectorAll('.breakdown-card').forEach((card) => {
-        card.addEventListener('click', () => openReelModal(card.dataset.videoId));
+        card.addEventListener('click', () => {
+          if (!miniReel) return;
+          miniReel.innerHTML = '';
+          const iframe = document.createElement('iframe');
+          iframe.src = `https://www.youtube.com/embed/${item.id}?autoplay=1&mute=1&rel=0&playsinline=1`;
+          iframe.title = `Anton Ray — ${label}`;
+          iframe.setAttribute('frameborder', '0');
+          iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+          iframe.setAttribute('allowfullscreen', '');
+          miniReel.appendChild(iframe);
+
+          grid.querySelectorAll('.work-card--video').forEach((c) => c.classList.remove('is-active'));
+          card.classList.add('is-active');
+          miniReel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+
+        grid.appendChild(card);
       });
-
-      strip.hidden = false;
     });
   }
 
