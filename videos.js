@@ -38,13 +38,12 @@ const VIDEOS = {
   // ---- Reel por categoría (sección "Reels", opcional) --------
   // Si le pones un id a alguna de estas, aparece un video arriba
   // de las tarjetas de esa pestaña (Rigging / Scripting / Motion
-  // Capture / Gumroad). Si la dejas en null, esa pestaña se queda
-  // solo con las tarjetas de texto, como está ahora.
+  // Capture). Si la dejas en null, esa pestaña se queda solo con
+  // las tarjetas de texto, como está ahora.
   reels: {
     rigging: null,
     scripting: null,
-    mocap: null,
-    gumroad: null
+    mocap: null
   }
 
 };

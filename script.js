@@ -70,10 +70,10 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!hasProducts) {
     console.warn('products.js no se cargó — revisa que esté antes de script.js en index.html');
   }
-  if (gumroadGrid && hasProducts && Array.isArray(PRODUCTS.gumroad)) {
+  if (gumroadGrid && hasProducts && Array.isArray(PRODUCTS.stores?.gumroad)) {
     const escapeAttr = (str) => String(str || '').replace(/"/g, '&quot;');
 
-    gumroadGrid.innerHTML = PRODUCTS.gumroad.map((p) => {
+    gumroadGrid.innerHTML = PRODUCTS.stores.gumroad.map((p) => {
       // Con id + url puestos, mostramos la vista previa real de Gumroad
       // (miniatura, precio, botón "I want this!") en vez de una tarjeta
       // hecha a mano — gumroad-embed.js la arma sola al cargar la página.

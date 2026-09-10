@@ -26,9 +26,9 @@
         <a href="#reel" class="i18n" data-en="Rigging">Rigging</a>
         <a href="#reels" data-tab="scripting">Scripting</a>
         <a href="#reels" data-tab="mocap" class="i18n" data-en="Motion Capture">Motion Capture</a>
-        <a href="#reels" data-tab="gumroad">Gumroad</a>
       </div>
     </div>
+    <a href="#store" class="i18n" data-en="Store">Tienda</a>
     <a href="#clientes" class="i18n" data-en="Clients">Clientes</a>
     <a href="#experiencia" class="i18n" data-en="Experience">Experiencia</a>
     <a href="#competencias" class="i18n" data-en="Skills">Competencias</a>
@@ -126,7 +126,6 @@
     <button class="tab-btn is-active" role="tab" aria-selected="true" data-tab="rigging">Rigging</button>
     <button class="tab-btn" role="tab" aria-selected="false" data-tab="scripting">Scripting</button>
     <button class="tab-btn i18n" role="tab" aria-selected="false" data-tab="mocap" data-en="Motion Capture">Motion Capture</button>
-    <button class="tab-btn" role="tab" aria-selected="false" data-tab="gumroad">Gumroad</button>
   </div>
 
   <div class="tab-panels">
@@ -199,19 +198,25 @@
       </div>
     </div>
 
-    <div class="tab-panel" id="panel-gumroad" role="tabpanel" hidden>
-      <div class="mini-reel" id="reel-gumroad"></div>
-      <!-- Tira horizontal (como los shorts) — las tarjetas se generan
-           automáticamente desde products.js -->
-      <div class="gumroad-strip">
-        <button class="shorts__nav gumroad-nav--prev" type="button" aria-label="Anteriores" id="gumroad-nav-prev">‹</button>
-        <div class="gumroad-track" id="gumroad-grid"></div>
-        <button class="shorts__nav gumroad-nav--next" type="button" aria-label="Siguientes" id="gumroad-nav-next">›</button>
-      </div>
-      <a href="https://rayant4.gumroad.com" target="_blank" rel="noopener" class="btn btn--outline i18n" data-en="Visit Gumroad store ↗">Ver tienda en Gumroad ↗</a>
-    </div>
-
   </div>
+</section>
+
+<!-- TIENDA -->
+<!-- Sección propia (no una pestaña de Reels) para que quepa cualquier
+     tienda — Gumroad hoy, ArtStation o la que sea después. Cada tienda
+     es un bloque de products.js; agregar una nueva es duplicar este
+     bloque y darle su propio contenedor/ids. -->
+<section class="store" id="store">
+  <p class="section-label">// STORE</p>
+
+  <!-- Tira horizontal (como los shorts) — las tarjetas se generan
+       automáticamente desde products.js -->
+  <div class="gumroad-strip">
+    <button class="shorts__nav gumroad-nav--prev" type="button" aria-label="Anteriores" id="gumroad-nav-prev">‹</button>
+    <div class="gumroad-track" id="gumroad-grid"></div>
+    <button class="shorts__nav gumroad-nav--next" type="button" aria-label="Siguientes" id="gumroad-nav-next">›</button>
+  </div>
+  <a href="https://rayant4.gumroad.com" target="_blank" rel="noopener" class="btn btn--outline i18n" data-en="Visit Gumroad store ↗">Ver tienda en Gumroad ↗</a>
 </section>
 
 <!-- CLIENTES -->
