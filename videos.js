@@ -40,10 +40,15 @@ const VIDEOS = {
   // de las tarjetas de esa pestaña (Rigging / Scripting / Motion
   // Capture). Si la dejas en null, esa pestaña se queda solo con
   // las tarjetas de texto, como está ahora.
+  //
+  // "clientes" es el mismo mecanismo pero fuera de las pestañas de
+  // Reels — aparece arriba de las marcas en la sección Clientes.
+  // Úsalo para un reel de spots/comerciales.
   reels: {
-    rigging: null,
-    scripting: null,
-    mocap: null
+    rigging: "uUSTvOocdVQ",   // https://youtu.be/uUSTvOocdVQ
+    scripting: "RCbAVlhtBRE", // https://youtu.be/RCbAVlhtBRE
+    mocap: "DXeYSTxG2D0",     // https://youtu.be/DXeYSTxG2D0
+    clientes: "6M0dyRBKo3w"   // https://youtu.be/6M0dyRBKo3w — reel de spots publicitarios
   }
 
 };
