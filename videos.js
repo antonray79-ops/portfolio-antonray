@@ -40,16 +40,25 @@ const VIDEOS = {
   // de las tarjetas de esa pestaña (Rigging / Scripting / Motion
   // Capture). Si la dejas en null, esa pestaña se queda solo con
   // las tarjetas de texto, como está ahora.
-  //
-  // "clientes" es el mismo mecanismo pero fuera de las pestañas de
-  // Reels — aparece arriba de las marcas en la sección Clientes.
-  // Úsalo para un reel de spots/comerciales.
   reels: {
     rigging: "uUSTvOocdVQ",   // https://youtu.be/uUSTvOocdVQ
     scripting: "RCbAVlhtBRE", // https://youtu.be/RCbAVlhtBRE
-    mocap: "DXeYSTxG2D0",     // https://youtu.be/DXeYSTxG2D0
-    clientes: "6M0dyRBKo3w"   // https://youtu.be/6M0dyRBKo3w — reel de spots publicitarios
+    mocap: "DXeYSTxG2D0"      // https://youtu.be/DXeYSTxG2D0
   },
+
+  // ---- Tira de Clientes (sección "Clientes") -----------------
+  // Tira horizontal de clips por marca — spots/comerciales
+  // horizontales (16:9) y shorts/reels verticales (9:16) mezclados
+  // en la misma tira. Cada uno lleva un "title" que aparece debajo
+  // del video para identificar la marca o lo que se hizo.
+  //
+  // Para agregar uno nuevo, copia este bloque y pega tu id/título:
+  //   { id: "idDelVideo", title: "Nombre de la marca — qué se hizo", vertical: false },
+  // Pon vertical: true si el clip es vertical (un short de 9:16) en
+  // vez de un spot horizontal normal.
+  clientes: [
+    { id: "6M0dyRBKo3w", title: "Reel de spots publicitarios", vertical: false },
+  ],
 
   // ---- Breakdowns por pestaña (sección "Reels", opcional) -----
   // Aparecen como tarjetas dentro de la misma cuadrícula que "Cascade

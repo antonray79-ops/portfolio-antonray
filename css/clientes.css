@@ -1,6 +1,163 @@
 /* ============================================================
-   CLIENTES — grid de marcas
+   CLIENTES — tira de videos por marca + grid de marcas
    ============================================================ */
+
+/* ---- Reproductor destacado (se abre arriba de la tira) ----
+   Igual mecanismo que .shorts__player, pero cambia de forma según el
+   video: 16/9 y más ancho para spots horizontales, 9/16 y angosto
+   para shorts verticales (ver .is-vertical, la pone js/clientes.js). */
+.clients__player {
+  position: relative;
+  width: 480px;
+  max-width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.4s var(--ease), opacity 0.3s var(--ease), margin-bottom 0.4s var(--ease), width 0.3s var(--ease);
+}
+.clients__player.is-open { max-height: 600px; opacity: 1; margin-bottom: 28px; }
+.clients__player-frame {
+  position: relative;
+  aspect-ratio: 16/9;
+  background: var(--black-soft);
+  border: 1px solid var(--cyan);
+}
+.clients__player-frame.is-vertical { aspect-ratio: 9/16; }
+.clients__player.is-open:has(.clients__player-frame.is-vertical) { width: 240px; }
+.clients__player-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.clients__player-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--panel-line);
+  border-radius: 50%;
+  background: rgba(6,6,7,0.7);
+  backdrop-filter: blur(4px);
+  color: var(--text-dim);
+  font-size: 13px;
+  cursor: pointer;
+  transition: color 0.25s var(--ease), border-color 0.25s var(--ease);
+}
+.clients__player-close:hover { color: var(--cyan); border-color: var(--cyan); }
+
+/* ---- Tira horizontal (VIDEOS.clientes) ---- */
+.clients__wrap { position: relative; margin-bottom: 40px; }
+
+.clients__track-mask {
+  overflow-x: auto;
+  overflow-y: hidden;
+  margin: 0 -40px;
+  padding: 4px 40px 6px;
+  cursor: grab;
+  -webkit-mask-image: linear-gradient(to right, transparent, black 40px, black calc(100% - 40px), transparent);
+  mask-image: linear-gradient(to right, transparent, black 40px, black calc(100% - 40px), transparent);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.clients__track-mask::-webkit-scrollbar { display: none; }
+.clients__track-mask.is-grabbing { cursor: grabbing; }
+
+.clients__track {
+  display: flex;
+  gap: 18px;
+  width: max-content;
+}
+
+/* Tarjeta — el ancho cambia según orientación, pero comparten look */
+.clients__card {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--panel-line);
+  background: var(--black-soft);
+  overflow: hidden;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.25s var(--ease), transform 0.25s var(--ease);
+}
+.clients__card:hover { border-color: var(--cyan); transform: translateY(-3px); }
+.clients__card.is-active { border-color: var(--cyan); }
+.clients__card--horizontal { width: 280px; }
+.clients__card--vertical { width: 150px; }
+
+.clients__card-thumb { position: relative; background: var(--black-soft); }
+.clients__card--horizontal .clients__card-thumb { aspect-ratio: 16/9; }
+.clients__card--vertical .clients__card-thumb { aspect-ratio: 9/16; }
+.clients__card-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.75);
+  transition: filter 0.3s var(--ease), transform 0.3s var(--ease);
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+.clients__card:hover .clients__card-thumb img,
+.clients__card.is-active .clients__card-thumb img {
+  filter: brightness(0.5);
+  transform: scale(1.04);
+}
+.clients__card-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--cyan);
+  border-radius: 50%;
+  color: var(--cyan);
+  font-size: 12px;
+  background: rgba(6,6,7,0.55);
+  backdrop-filter: blur(3px);
+  pointer-events: none;
+  transition: background 0.25s var(--ease), color 0.25s var(--ease);
+}
+.clients__card:hover .clients__card-play,
+.clients__card.is-active .clients__card-play {
+  background: var(--cyan);
+  color: var(--black);
+}
+
+/* Título debajo del video — marca o qué se hizo */
+.clients__card-title {
+  padding: 10px 12px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: var(--text-dim);
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.clients__nav--prev { left: 0; }
+.clients__nav--next { right: 0; }
+
+@media (max-width: 600px) {
+  .clients__nav--prev, .clients__nav--next { display: none; }
+}
 
 .clients__grid {
   display: grid;

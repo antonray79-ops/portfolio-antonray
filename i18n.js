@@ -39,10 +39,10 @@ const I18N = {
   store_gumroad_link: "Visit Gumroad store ↗",
 
   // ---- Clientes ------------------------------------------
-  label_clients: "// 01 — BRANDS I'VE WORKED WITH",
+  label_clients: "// BRANDS I'VE WORKED WITH",
 
   // ---- Experiencia ---------------------------------------
-  label_experience: "// 02 — PROFESSIONAL EXPERIENCE",
+  label_experience: "// 01 — PROFESSIONAL EXPERIENCE",
   exp_spacejoints_date: "2016 — Present",
   exp_spacejoints_desc: "My own virtual production studio. Leading VFX, motion capture, and real-time pipeline projects for film, TV, advertising, and live events — including TV Azteca commercials for the Qatar and Mexico 2026 World Cups, the VISA World Cup Mexico campaign, and the full MoCap pipeline for Marinela's virtual character at its live performance at Auditorio Nacional.",
   exp_orionn_desc: "Supervised motion capture and visual effects depending on the project — multidisciplinary work across different productions.",
@@ -50,16 +50,16 @@ const I18N = {
   exp_lala_desc: "Character rigging for 3D production.",
 
   // ---- Competencias --------------------------------------
-  label_skills: "// 03 — TECHNICAL SKILLS",
+  label_skills: "// 02 — TECHNICAL SKILLS",
   skill_mocap: "Motion Capture",
   skill_sim: "Simulation & XR",
 
   // ---- Educación -----------------------------------------
-  label_education: "// 04 — EDUCATION",
+  label_education: "// 03 — EDUCATION",
   edu_mba: "Master of Business Administration",
 
   // ---- Contacto ------------------------------------------
-  label_contact: "// 05 — CONTACT",
+  label_contact: "// 04 — CONTACT",
   contact_headline: "Let's build something together?",
   contact_phone_label: "PHONE",
   contact_phone_value: "Add number",

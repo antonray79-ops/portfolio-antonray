@@ -1,0 +1,7 @@
+# Notas/resúmenes que Claude genera para sí mismo entre sesiones —
+# no forman parte del sitio, no hace falta subirlas al repo.
+Claude outputs/
+
+# Basura típica de Windows/editor
+Thumbs.db
+.DS_Store

@@ -47,26 +47,30 @@ const WORK = {
     }
   ],
 
-  scripting: [
-    {
-      thumb: "PY",
-      title: "myTools Compendium",
-      desc: "Launcher central en PySide2/PySide6 para todas mis herramientas de rigging en Maya, con manejo de ventana vía shiboken + MQtUtil.",
-      descEn: "Central launcher in PySide2/PySide6 for all my Maya rigging tools, with window handling via shiboken + MQtUtil."
-    },
-    {
-      thumb: "PY",
-      title: "Finger Retarget Tool v2.0",
-      desc: "Retargeting de dedos con sistema de presets versionado.",
-      descEn: "Finger retargeting with a versioned preset system."
-    },
-    {
-      thumb: "PY",
-      title: "FaceCSV Player",
-      desc: "Reproductor/importador de datos de captura facial en formato CSV directo en Maya.",
-      descEn: "Facial capture CSV player/importer, straight into Maya."
-    }
-  ],
+  // Vacío a propósito: esta pestaña ahora solo muestra videos de
+  // breakdown (VIDEOS.breakdowns.scripting en videos.js) — el detalle
+  // de cada herramienta de código ya vive en la tienda de Gumroad
+  // (products.js). Tarjetas originales, por si algún día se quiere
+  // regresar a este formato:
+  // {
+  //   thumb: "PY",
+  //   title: "myTools Compendium",
+  //   desc: "Launcher central en PySide2/PySide6 para todas mis herramientas de rigging en Maya, con manejo de ventana vía shiboken + MQtUtil.",
+  //   descEn: "Central launcher in PySide2/PySide6 for all my Maya rigging tools, with window handling via shiboken + MQtUtil."
+  // },
+  // {
+  //   thumb: "PY",
+  //   title: "Finger Retarget Tool v2.0",
+  //   desc: "Retargeting de dedos con sistema de presets versionado.",
+  //   descEn: "Finger retargeting with a versioned preset system."
+  // },
+  // {
+  //   thumb: "PY",
+  //   title: "FaceCSV Player",
+  //   desc: "Reproductor/importador de datos de captura facial en formato CSV directo en Maya.",
+  //   descEn: "Facial capture CSV player/importer, straight into Maya."
+  // }
+  scripting: [],
 
   mocap: [
     {

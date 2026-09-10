@@ -166,10 +166,24 @@
 
 <!-- CLIENTES -->
 <section class="clients" id="clientes">
-  <p class="section-label i18n" data-i18n="label_clients">// 01 — MARCAS CON LAS QUE HE TRABAJADO</p>
-  <!-- Reel de spots publicitarios — mismo mecanismo que los mini-reels de
-       Reels (videos.js -> VIDEOS.reels.clientes); se oculta solo si no hay id -->
-  <div class="mini-reel" id="reel-clientes"></div>
+  <p class="section-label i18n" data-i18n="label_clients">// MARCAS CON LAS QUE HE TRABAJADO</p>
+
+  <!-- Tira de videos por marca (spots horizontales + shorts verticales) —
+       se arma sola desde videos.js -> VIDEOS.clientes. Para agregar un
+       video nuevo solo edita esa lista, no hace falta tocar este HTML. -->
+  <div class="clients__player" id="clients-player">
+    <div class="clients__player-frame"></div>
+    <button class="clients__player-close" id="clients-player-close" type="button" aria-label="Cerrar">✕</button>
+  </div>
+
+  <div class="clients__wrap">
+    <button class="shorts__nav clients__nav--prev" type="button" aria-label="Anteriores">‹</button>
+    <div class="clients__track-mask">
+      <div class="clients__track" id="clients-track"></div>
+    </div>
+    <button class="shorts__nav clients__nav--next" type="button" aria-label="Siguientes">›</button>
+  </div>
+
   <div class="clients__grid">
     <div class="client-chip">Honda México</div>
     <div class="client-chip">TV Azteca</div>
@@ -185,7 +199,7 @@
 
 <!-- EXPERIENCIA -->
 <section class="experience" id="experiencia">
-  <p class="section-label i18n" data-i18n="label_experience">// 02 — EXPERIENCIA PROFESIONAL</p>
+  <p class="section-label i18n" data-i18n="label_experience">// 01 — EXPERIENCIA PROFESIONAL</p>
   <div class="timeline">
 
     <article class="timeline__item">
@@ -229,7 +243,7 @@
 
 <!-- COMPETENCIAS -->
 <section class="skills" id="competencias">
-  <p class="section-label i18n" data-i18n="label_skills">// 03 — COMPETENCIAS TÉCNICAS</p>
+  <p class="section-label i18n" data-i18n="label_skills">// 02 — COMPETENCIAS TÉCNICAS</p>
   <div class="skills__grid">
 
     <div class="skill-card">
@@ -276,7 +290,7 @@
 
 <!-- EDUCACIÓN -->
 <section class="education">
-  <p class="section-label i18n" data-i18n="label_education">// 04 — EDUCACIÓN</p>
+  <p class="section-label i18n" data-i18n="label_education">// 03 — EDUCACIÓN</p>
   <div class="education__grid">
     <div class="edu-card">
       <span class="edu-card__tag">MBA</span>
@@ -292,7 +306,7 @@
 
 <!-- CONTACTO -->
 <footer class="contact" id="contacto">
-  <p class="section-label i18n" data-i18n="label_contact">// 05 — CONTACTO</p>
+  <p class="section-label i18n" data-i18n="label_contact">// 04 — CONTACTO</p>
   <h2 class="contact__headline i18n" data-i18n="contact_headline">¿Hacemos algo juntos?</h2>
 
   <div class="contact__grid">
@@ -327,13 +341,29 @@
 </div>
 
 <!-- Embed oficial de Gumroad — convierte los <div class="gumroad-product-embed">
-     que agrega script.js (desde products.js) en la vista previa real del
+     que agrega js/tienda.js (desde products.js) en la vista previa real del
      producto: miniatura, precio y botón "I want this!" -->
 <script src="https://gumroad.com/js/gumroad-embed.js"></script>
+
+<!-- Datos (contenido) — deben ir antes que los scripts de abajo -->
 <script src="i18n.js"></script>
 <script src="videos.js"></script>
 <script src="work.js"></script>
 <script src="products.js"></script>
-<script src="script.js"></script>
+
+<!-- Comportamiento, separado por sección (ver js/). idioma.js va después
+     de reels.js/shorts.js/tienda.js a propósito: necesita que esas
+     tarjetas ya existan para poder capturar su texto en español. -->
+<script src="js/core.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/modal.js"></script>
+<script src="js/reels.js"></script>
+<script src="js/tabs.js"></script>
+<script src="js/shorts.js"></script>
+<script src="js/clientes.js"></script>
+<script src="js/tienda.js"></script>
+<script src="js/idioma.js"></script>
+<script src="js/scroll-reveal.js"></script>
+<script src="js/smooth-scroll.js"></script>
 </body>
 </html>
