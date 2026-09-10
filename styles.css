@@ -495,6 +495,24 @@ section, .contact {
   animation: fadeUp 0.5s var(--ease) both;
 }
 
+/* Optional per-tab reel — only appears when videos.js has an id for it */
+.mini-reel {
+  position: relative;
+  aspect-ratio: 16/9;
+  background: var(--black-soft);
+  border: 1px solid var(--panel-line);
+  margin-bottom: 28px;
+  overflow: hidden;
+}
+.mini-reel:empty { display: none; margin-bottom: 0; }
+.mini-reel iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
 .work-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));

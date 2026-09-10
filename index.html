@@ -84,27 +84,8 @@
     <button class="shorts__nav shorts__nav--prev" type="button" aria-label="Anteriores">‹</button>
 
     <div class="shorts__marquee">
-      <div class="shorts__track">
-        <button class="shorts__card" type="button" data-video-id="XJ4pn3oDILU"><img src="https://img.youtube.com/vi/XJ4pn3oDILU/hqdefault.jpg" alt="Anton Ray — Short" loading="lazy"><span class="shorts__card-play">▶</span></button>
-        <button class="shorts__card" type="button" data-video-id="XCvin_4PB4w"><img src="https://img.youtube.com/vi/XCvin_4PB4w/hqdefault.jpg" alt="Anton Ray — Short" loading="lazy"><span class="shorts__card-play">▶</span></button>
-        <button class="shorts__card" type="button" data-video-id="X1sU8mrPp_s"><img src="https://img.youtube.com/vi/X1sU8mrPp_s/hqdefault.jpg" alt="Anton Ray — Short" loading="lazy"><span class="shorts__card-play">▶</span></button>
-        <button class="shorts__card" type="button" data-video-id="4TfSkFqWUN0"><img src="https://img.youtube.com/vi/4TfSkFqWUN0/hqdefault.jpg" alt="Anton Ray — Short" loading="lazy"><span class="shorts__card-play">▶</span></button>
-        <button class="shorts__card" type="button" data-video-id="fpwaoHINEYQ"><img src="https://img.youtube.com/vi/fpwaoHINEYQ/hqdefault.jpg" alt="Anton Ray — Short" loading="lazy"><span class="shorts__card-play">▶</span></button>
-        <button class="shorts__card" type="button" data-video-id="MKnKUDn17bs"><img src="https://img.youtube.com/vi/MKnKUDn17bs/hqdefault.jpg" alt="Anton Ray — Short" loading="lazy"><span class="shorts__card-play">▶</span></button>
-        <button class="shorts__card" type="button" data-video-id="yXDI_Vle3ys"><img src="https://img.youtube.com/vi/yXDI_Vle3ys/hqdefault.jpg" alt="Anton Ray — Short" loading="lazy"><span class="shorts__card-play">▶</span></button>
-        <button class="shorts__card" type="button" data-video-id="0Ipac8k9mAI"><img src="https://img.youtube.com/vi/0Ipac8k9mAI/hqdefault.jpg" alt="Anton Ray — Short" loading="lazy"><span class="shorts__card-play">▶</span></button>
-        <button class="shorts__card" type="button" data-video-id="GBfyC6l5dX0"><img src="https://img.youtube.com/vi/GBfyC6l5dX0/hqdefault.jpg" alt="Anton Ray — Short" loading="lazy"><span class="shorts__card-play">▶</span></button>
-
-        <button class="shorts__card" type="button" data-video-id="XJ4pn3oDILU" aria-hidden="true" tabindex="-1"><img src="https://img.youtube.com/vi/XJ4pn3oDILU/hqdefault.jpg" alt="" loading="lazy"><span class="shorts__card-play">▶</span></button>
-        <button class="shorts__card" type="button" data-video-id="XCvin_4PB4w" aria-hidden="true" tabindex="-1"><img src="https://img.youtube.com/vi/XCvin_4PB4w/hqdefault.jpg" alt="" loading="lazy"><span class="shorts__card-play">▶</span></button>
-        <button class="shorts__card" type="button" data-video-id="X1sU8mrPp_s" aria-hidden="true" tabindex="-1"><img src="https://img.youtube.com/vi/X1sU8mrPp_s/hqdefault.jpg" alt="" loading="lazy"><span class="shorts__card-play">▶</span></button>
-        <button class="shorts__card" type="button" data-video-id="4TfSkFqWUN0" aria-hidden="true" tabindex="-1"><img src="https://img.youtube.com/vi/4TfSkFqWUN0/hqdefault.jpg" alt="" loading="lazy"><span class="shorts__card-play">▶</span></button>
-        <button class="shorts__card" type="button" data-video-id="fpwaoHINEYQ" aria-hidden="true" tabindex="-1"><img src="https://img.youtube.com/vi/fpwaoHINEYQ/hqdefault.jpg" alt="" loading="lazy"><span class="shorts__card-play">▶</span></button>
-        <button class="shorts__card" type="button" data-video-id="MKnKUDn17bs" aria-hidden="true" tabindex="-1"><img src="https://img.youtube.com/vi/MKnKUDn17bs/hqdefault.jpg" alt="" loading="lazy"><span class="shorts__card-play">▶</span></button>
-        <button class="shorts__card" type="button" data-video-id="yXDI_Vle3ys" aria-hidden="true" tabindex="-1"><img src="https://img.youtube.com/vi/yXDI_Vle3ys/hqdefault.jpg" alt="" loading="lazy"><span class="shorts__card-play">▶</span></button>
-        <button class="shorts__card" type="button" data-video-id="0Ipac8k9mAI" aria-hidden="true" tabindex="-1"><img src="https://img.youtube.com/vi/0Ipac8k9mAI/hqdefault.jpg" alt="" loading="lazy"><span class="shorts__card-play">▶</span></button>
-        <button class="shorts__card" type="button" data-video-id="GBfyC6l5dX0" aria-hidden="true" tabindex="-1"><img src="https://img.youtube.com/vi/GBfyC6l5dX0/hqdefault.jpg" alt="" loading="lazy"><span class="shorts__card-play">▶</span></button>
-      </div>
+      <!-- Las tarjetas se generan automáticamente desde videos.js -->
+      <div class="shorts__track" id="shorts-track"></div>
     </div>
 
     <button class="shorts__nav shorts__nav--next" type="button" aria-label="Siguientes">›</button>
@@ -121,8 +102,9 @@
       <span>4K · 24FPS</span>
     </div>
     <div class="reel__video">
+      <!-- src se llena desde videos.js (VIDEOS.reel.id) -->
       <iframe
-        src="https://www.youtube.com/embed/hp48qOfm4yo?rel=0"
+        id="reel-iframe"
         title="Anton Ray — Demo Reel"
         frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -150,6 +132,7 @@
   <div class="tab-panels">
 
     <div class="tab-panel is-active" id="panel-rigging" role="tabpanel">
+      <div class="mini-reel" id="reel-rigging"></div>
       <div class="work-grid">
         <div class="work-card">
           <div class="work-card__thumb">RIG</div>
@@ -175,6 +158,7 @@
     </div>
 
     <div class="tab-panel" id="panel-scripting" role="tabpanel" hidden>
+      <div class="mini-reel" id="reel-scripting"></div>
       <div class="work-grid">
         <div class="work-card">
           <div class="work-card__thumb">PY</div>
@@ -195,6 +179,7 @@
     </div>
 
     <div class="tab-panel" id="panel-mocap" role="tabpanel" hidden>
+      <div class="mini-reel" id="reel-mocap"></div>
       <div class="work-grid">
         <div class="work-card">
           <div class="work-card__thumb">MC</div>
@@ -215,6 +200,7 @@
     </div>
 
     <div class="tab-panel" id="panel-gumroad" role="tabpanel" hidden>
+      <div class="mini-reel" id="reel-gumroad"></div>
       <div class="work-grid">
         <div class="work-card">
           <div class="work-card__thumb">GR</div>
@@ -387,6 +373,7 @@
   </div>
 </footer>
 
+<script src="videos.js"></script>
 <script src="script.js"></script>
 </body>
 </html>

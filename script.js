@@ -17,6 +17,52 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
+  // --- Videos: everything below reads from videos.js (window.VIDEOS) ---
+  // so adding/removing a clip is just editing that file, never this one.
+  const hasVideos = typeof VIDEOS !== 'undefined';
+  if (!hasVideos) {
+    console.warn('videos.js no se cargó — revisa que esté antes de script.js en index.html');
+  }
+
+  // Reel principal (sección #reel)
+  const reelIframe = document.getElementById('reel-iframe');
+  if (reelIframe && hasVideos && VIDEOS.reel && VIDEOS.reel.id) {
+    reelIframe.src = `https://www.youtube.com/embed/${VIDEOS.reel.id}?rel=0`;
+  }
+
+  // Reel opcional por pestaña dentro de la sección Reels
+  if (hasVideos && VIDEOS.reels) {
+    Object.keys(VIDEOS.reels).forEach((tabName) => {
+      const videoId = VIDEOS.reels[tabName];
+      const container = document.getElementById(`reel-${tabName}`);
+      if (!videoId || !container) return;
+
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0`;
+      iframe.title = `Anton Ray — ${tabName}`;
+      iframe.setAttribute('frameborder', '0');
+      iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+      iframe.setAttribute('allowfullscreen', '');
+      container.appendChild(iframe);
+    });
+  }
+
+  // Tarjetas de la tira de shorts (dobladas para el loop infinito)
+  const shortsTrackEl = document.getElementById('shorts-track');
+  if (shortsTrackEl && hasVideos && Array.isArray(VIDEOS.shorts)) {
+    const ids = VIDEOS.shorts.filter(Boolean);
+
+    const cardHTML = (id, isDuplicate) => `
+      <button class="shorts__card" type="button" data-video-id="${id}"${isDuplicate ? ' aria-hidden="true" tabindex="-1"' : ''}>
+        <img src="https://img.youtube.com/vi/${id}/hqdefault.jpg" alt="${isDuplicate ? '' : 'Anton Ray — Short'}" loading="lazy">
+        <span class="shorts__card-play">▶</span>
+      </button>`;
+
+    shortsTrackEl.innerHTML =
+      ids.map((id) => cardHTML(id, false)).join('') +
+      ids.map((id) => cardHTML(id, true)).join('');
+  }
+
   // --- Mobile nav (hamburger) ---
   const navToggle = document.getElementById('hud-nav-toggle');
   const navLinks = document.getElementById('hud-nav-links');
