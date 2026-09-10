@@ -155,7 +155,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Drag-to-scroll
     marquee.addEventListener('pointerdown', (e) => {
       isPointerDown = true;
-      wasDragging = false;
       startX = e.clientX;
       startScroll = marquee.scrollLeft;
       marquee.classList.add('is-grabbing');
@@ -165,30 +164,60 @@ document.addEventListener('DOMContentLoaded', () => {
     marquee.addEventListener('pointermove', (e) => {
       if (!isPointerDown) return;
       const delta = e.clientX - startX;
-      if (Math.abs(delta) > 5) wasDragging = true;
       marquee.scrollLeft = startScroll - delta;
     });
 
     function endDrag() {
+      if (!isPointerDown) return;
       isPointerDown = false;
       marquee.classList.remove('is-grabbing');
+      // Only treat it as a drag (and suppress the click) if the strip actually
+      // moved a meaningful amount — a plain click can jitter a couple of
+      // pixels and shouldn't cancel playing the short.
+      const dragDistance = Math.abs(marquee.scrollLeft - startScroll);
+      wasDragging = dragDistance > 8;
       pauseAutoTemporarily();
     }
     marquee.addEventListener('pointerup', endDrag);
     marquee.addEventListener('pointercancel', endDrag);
 
     // Arrow buttons
-    const step = 168; // card width (150) + gap (18)
+    const step = 258; // card width (240) + gap (18)
     document.querySelector('.shorts__nav--prev')?.addEventListener('click', () => {
       pauseAutoTemporarily();
-      marquee.scrollBy({ left: -step * 2, behavior: 'smooth' });
+      marquee.scrollBy({ left: -step, behavior: 'smooth' });
     });
     document.querySelector('.shorts__nav--next')?.addEventListener('click', () => {
       pauseAutoTemporarily();
-      marquee.scrollBy({ left: step * 2, behavior: 'smooth' });
+      marquee.scrollBy({ left: step, behavior: 'smooth' });
     });
 
-    // Open lightbox on click — unless the click was actually a drag
+    // Play a short right inside its own card (no popup, no leaving the page)
+    function playInline(card) {
+      if (card.classList.contains('is-playing')) return;
+      document.querySelectorAll('.shorts__card.is-playing').forEach(stopInline);
+
+      const videoId = card.dataset.videoId;
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&playsinline=1`;
+      iframe.title = 'Anton Ray — Short';
+      iframe.setAttribute('frameborder', '0');
+      iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+      iframe.setAttribute('allowfullscreen', '');
+      card.appendChild(iframe);
+      card.classList.add('is-playing');
+
+      clearTimeout(resumeTimer);
+      autoPaused = true; // don't scroll a card away while it's playing
+    }
+
+    function stopInline(card) {
+      const iframe = card.querySelector('iframe');
+      if (iframe) iframe.remove();
+      card.classList.remove('is-playing');
+      autoPaused = false;
+    }
+
     document.querySelectorAll('.shorts__card').forEach((card) => {
       card.addEventListener('click', (e) => {
         if (wasDragging) {
@@ -197,36 +226,15 @@ document.addEventListener('DOMContentLoaded', () => {
           wasDragging = false;
           return;
         }
-        openLightbox(card.dataset.videoId);
+        if (e.target.closest('.shorts__card-close')) {
+          e.stopPropagation();
+          stopInline(card);
+          return;
+        }
+        playInline(card);
       });
     });
   }
-
-  // --- Lightbox (plays reel shorts inline instead of leaving the site) ---
-  const lightbox = document.getElementById('lightbox');
-  const lightboxIframe = document.getElementById('lightbox-iframe');
-  const lightboxClose = document.getElementById('lightbox-close');
-  const lightboxBackdrop = document.getElementById('lightbox-backdrop');
-
-  function openLightbox(videoId) {
-    if (!lightbox || !lightboxIframe || !videoId) return;
-    lightboxIframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&playsinline=1`;
-    lightbox.hidden = false;
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeLightbox() {
-    if (!lightbox || !lightboxIframe) return;
-    lightbox.hidden = true;
-    lightboxIframe.src = '';
-    document.body.style.overflow = '';
-  }
-
-  lightboxClose?.addEventListener('click', closeLightbox);
-  lightboxBackdrop?.addEventListener('click', closeLightbox);
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && lightbox && !lightbox.hidden) closeLightbox();
-  });
 
   // --- Smooth-scroll for in-page nav links ---
   document.querySelectorAll('a[href^="#"]').forEach((link) => {
