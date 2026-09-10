@@ -1,0 +1,28 @@
+/* ============================================================
+   CLIENTES — grid de marcas
+   ============================================================ */
+
+.clients__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1px;
+  background: var(--panel-line);
+  border: 1px solid var(--panel-line);
+}
+.client-chip {
+  background: var(--black);
+  padding: 32px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  color: var(--text-faint);
+  transition: color 0.3s var(--ease), background 0.3s var(--ease);
+}
+.client-chip:hover {
+  color: var(--cyan);
+  background: rgba(94,230,230,0.04);
+}

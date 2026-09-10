@@ -1,0 +1,162 @@
+/* ============================================================
+   REELS — pestañas Rigging/Scripting/Motion Capture, mini-reel,
+   tarjetas de trabajo (work.js) y tarjetas de breakdown (video)
+   ============================================================ */
+
+.work { padding-top: 60px; }
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 40px;
+  border-bottom: 1px solid var(--panel-line);
+}
+.tab-btn {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: var(--text-faint);
+  background: transparent;
+  border: none;
+  padding: 12px 20px 16px;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.25s var(--ease);
+}
+.tab-btn::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -1px;
+  height: 2px;
+  background: var(--amber);
+  transform: scaleX(0);
+  transition: transform 0.3s var(--ease);
+}
+.tab-btn:hover { color: var(--text); }
+.tab-btn.is-active { color: var(--amber); }
+.tab-btn.is-active::after { transform: scaleX(1); }
+
+.tab-panel { display: none; }
+.tab-panel.is-active {
+  display: block;
+  animation: fadeUp 0.5s var(--ease) both;
+}
+
+/* Optional per-tab reel — only appears when videos.js has an id for it */
+.mini-reel {
+  position: relative;
+  aspect-ratio: 16/9;
+  background: var(--black-soft);
+  border: 1px solid var(--panel-line);
+  margin-bottom: 28px;
+  overflow: hidden;
+}
+.mini-reel:empty { display: none; margin-bottom: 0; }
+.mini-reel iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  margin-bottom: 32px;
+}
+.work-card {
+  border: 1px solid var(--panel-line);
+  background: var(--panel);
+  padding: 24px;
+  transition: border-color 0.3s var(--ease), transform 0.3s var(--ease);
+}
+.work-card:hover {
+  border-color: var(--cyan);
+  transform: translateY(-3px);
+}
+.work-card__thumb {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  color: var(--cyan);
+  border: 1px solid var(--panel-line);
+  margin-bottom: 18px;
+}
+.work-card h3 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  margin-bottom: 10px;
+}
+.work-card p { color: var(--text-dim); font-size: 14px; line-height: 1.6; }
+
+/* Breakdowns — se mezclan como tarjetas dentro de la MISMA cuadrícula que
+   "Cascade Rig System" etc. (mismo .work-card). En vez de descripción,
+   muestran una miniatura de YouTube con botón de play; al hacerles clic,
+   el video se reproduce arriba en el mini-reel de esa pestaña, no en
+   ventana aparte. */
+.work-card--video {
+  padding: 0;
+  cursor: pointer;
+  overflow: hidden;
+  text-align: left;
+  display: block;
+  width: 100%;
+  font: inherit;
+  color: inherit;
+  background: var(--panel);
+  transition: border-color 0.3s var(--ease), transform 0.3s var(--ease);
+}
+.work-card--video:hover { transform: translateY(-3px); }
+.work-card--video.is-active { border-color: var(--cyan); }
+.work-card__video-thumb {
+  position: relative;
+  aspect-ratio: 16/9;
+  background: var(--black-soft);
+}
+.work-card__video-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.7);
+  transition: filter 0.3s var(--ease), transform 0.3s var(--ease);
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+.work-card--video:hover .work-card__video-thumb img { filter: brightness(0.5); transform: scale(1.04); }
+.work-card__play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--cyan);
+  border-radius: 50%;
+  color: var(--cyan);
+  font-size: 12px;
+  background: rgba(6,6,7,0.55);
+  backdrop-filter: blur(3px);
+  pointer-events: none;
+  transition: background 0.25s var(--ease), color 0.25s var(--ease);
+}
+.work-card--video:hover .work-card__play { background: var(--cyan); color: var(--black); }
+.work-card--video h3 {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  padding: 18px 20px 20px;
+}

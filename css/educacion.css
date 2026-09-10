@@ -1,0 +1,32 @@
+/* ============================================================
+   EDUCACIÓN
+   ============================================================ */
+
+.education__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+.edu-card {
+  border: 1px solid var(--panel-line);
+  padding: 28px;
+  background: var(--panel);
+}
+.edu-card__tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--amber);
+  border: 1px solid var(--amber);
+  padding: 4px 10px;
+  border-radius: 2px;
+  margin-bottom: 14px;
+}
+.edu-card h3 {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 17px;
+  margin-bottom: 6px;
+}
+.edu-card p { color: var(--text-dim); font-size: 14px; }
