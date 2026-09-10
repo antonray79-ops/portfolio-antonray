@@ -201,23 +201,8 @@
 
     <div class="tab-panel" id="panel-gumroad" role="tabpanel" hidden>
       <div class="mini-reel" id="reel-gumroad"></div>
-      <div class="work-grid">
-        <div class="work-card">
-          <div class="work-card__thumb">GR</div>
-          <h3>Finger Retarget Tool</h3>
-          <p class="i18n" data-en="Commercial finger retargeting tool for Maya.">Herramienta comercial de retargeting de dedos para Maya.</p>
-        </div>
-        <div class="work-card">
-          <div class="work-card__thumb">GR</div>
-          <h3>PoseSaverFaceTool</h3>
-          <p class="i18n" data-en="Save and recall facial poses for character animation.">Guardado y recall de poses faciales para animación de personajes.</p>
-        </div>
-        <div class="work-card">
-          <div class="work-card__thumb">GR</div>
-          <h3>Ribbon Script</h3>
-          <p class="i18n" data-en="Ribbon system generator for high-deformation rigs.">Generador de sistemas ribbon para rigs de alta deformación.</p>
-        </div>
-      </div>
+      <!-- Las tarjetas se generan automáticamente desde products.js -->
+      <div class="work-grid" id="gumroad-grid"></div>
       <a href="https://rayant4.gumroad.com" target="_blank" rel="noopener" class="btn btn--outline i18n" data-en="Visit Gumroad store ↗">Ver tienda en Gumroad ↗</a>
     </div>
 
@@ -373,7 +358,12 @@
   </div>
 </footer>
 
+<!-- Botón oficial de Gumroad — convierte cualquier <a class="gumroad-button">
+     en un botón de compra con overlay, incluyendo los que agrega script.js
+     dinámicamente desde products.js -->
+<script src="https://gumroad.com/js/gumroad.js"></script>
 <script src="videos.js"></script>
+<script src="products.js"></script>
 <script src="script.js"></script>
 </body>
 </html>

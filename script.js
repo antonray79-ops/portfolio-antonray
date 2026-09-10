@@ -63,6 +63,25 @@ document.addEventListener('DOMContentLoaded', () => {
       ids.map((id) => cardHTML(id, true)).join('');
   }
 
+  // Tarjetas de la pestaña Gumroad, con botón "Comprar" real cuando la
+  // liga ya está puesta en products.js
+  const gumroadGrid = document.getElementById('gumroad-grid');
+  const hasProducts = typeof PRODUCTS !== 'undefined';
+  if (!hasProducts) {
+    console.warn('products.js no se cargó — revisa que esté antes de script.js en index.html');
+  }
+  if (gumroadGrid && hasProducts && Array.isArray(PRODUCTS.gumroad)) {
+    const escapeAttr = (str) => String(str || '').replace(/"/g, '&quot;');
+
+    gumroadGrid.innerHTML = PRODUCTS.gumroad.map((p) => `
+      <div class="work-card">
+        <div class="work-card__thumb">GR</div>
+        <h3>${p.title}</h3>
+        <p class="i18n" data-en="${escapeAttr(p.descEn)}">${p.desc || ''}</p>
+        ${p.url ? `<a class="gumroad-button work-card__buy" href="${p.url}" target="_blank" rel="noopener">Comprar en Gumroad ↗</a>` : ''}
+      </div>`).join('');
+  }
+
   // --- Mobile nav (hamburger) ---
   const navToggle = document.getElementById('hud-nav-toggle');
   const navLinks = document.getElementById('hud-nav-links');
