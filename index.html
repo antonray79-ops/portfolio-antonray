@@ -21,18 +21,18 @@
   </a>
   <div class="hud-nav__links" id="hud-nav-links">
     <div class="nav-dropdown">
-      <a href="#reels" class="nav-dropdown__trigger i18n" data-en="Reels">Reels <span class="nav-dropdown__caret">▾</span></a>
+      <a href="#reels" class="nav-dropdown__trigger i18n" data-i18n="nav_reels">Reels <span class="nav-dropdown__caret">▾</span></a>
       <div class="nav-dropdown__menu">
-        <a href="#reel" class="i18n open-reel-modal" data-en="Rigging">Rigging</a>
+        <a href="#reel" class="i18n open-reel-modal" data-i18n="nav_rigging">Rigging</a>
         <a href="#reels" data-tab="scripting">Scripting</a>
-        <a href="#reels" data-tab="mocap" class="i18n" data-en="Motion Capture">Motion Capture</a>
+        <a href="#reels" data-tab="mocap" class="i18n" data-i18n="nav_mocap">Motion Capture</a>
       </div>
     </div>
-    <a href="#store" class="i18n" data-en="Store">Tienda</a>
-    <a href="#clientes" class="i18n" data-en="Clients">Clientes</a>
-    <a href="#experiencia" class="i18n" data-en="Experience">Experiencia</a>
-    <a href="#competencias" class="i18n" data-en="Skills">Competencias</a>
-    <a href="#contacto" class="i18n" data-en="Contact">Contacto</a>
+    <a href="#store" class="i18n" data-i18n="nav_store">Tienda</a>
+    <a href="#clientes" class="i18n" data-i18n="nav_clients">Clientes</a>
+    <a href="#experiencia" class="i18n" data-i18n="nav_experience">Experiencia</a>
+    <a href="#competencias" class="i18n" data-i18n="nav_skills">Competencias</a>
+    <a href="#contacto" class="i18n" data-i18n="nav_contact">Contacto</a>
   </div>
   <div class="hud-nav__right">
     <div class="lang-toggle" role="group" aria-label="Idioma / Language">
@@ -59,15 +59,15 @@
     <h1 class="hero__name">ANTON RAY</h1>
     <p class="hero__alias">Antonio Mexicano</p>
     <h2 class="hero__title">Creative Producer <span class="hero__dot">·</span> VFX Supervisor <span class="hero__dot">·</span> Rigging TD</h2>
-    <p class="hero__tagline i18n" data-en="10+ years bringing characters to life across film, TV, games, and virtual production — from the first meeting to the final render.">10+ años dando vida a personajes en cine, TV, videojuegos y virtual production — de la primera junta al render final.</p>
+    <p class="hero__tagline i18n" data-i18n="hero_tagline">10+ años dando vida a personajes en cine, TV, videojuegos y virtual production — de la primera junta al render final.</p>
     <a href="#reel" class="btn btn--primary open-reel-modal">
-      <span class="btn__icon">▶</span> <span class="i18n" data-en="Watch Reel">Ver Reel</span>
+      <span class="btn__icon">▶</span> <span class="i18n" data-i18n="hero_watch_reel">Ver Reel</span>
     </a>
 
     <div class="hero__quicklinks">
       <a href="#reels" data-tab="rigging" class="hero__quicklink">Rigging</a>
       <a href="#reels" data-tab="scripting" class="hero__quicklink">Scripting</a>
-      <a href="#reels" data-tab="mocap" class="hero__quicklink i18n" data-en="Motion Capture">Motion Capture</a>
+      <a href="#reels" data-tab="mocap" class="hero__quicklink i18n" data-i18n="hero_quicklink_mocap">Motion Capture</a>
     </div>
   </div>
 
@@ -97,7 +97,7 @@
     <button class="shorts__nav shorts__nav--next" type="button" aria-label="Siguientes">›</button>
   </div>
 
-  <a href="https://www.youtube.com/@AntonRaySJ" target="_blank" rel="noopener" class="shorts__more i18n" data-en="More clips on YouTube ↗">Más clips en YouTube ↗</a>
+  <a href="https://www.youtube.com/@AntonRaySJ" target="_blank" rel="noopener" class="shorts__more i18n" data-i18n="shorts_more">Más clips en YouTube ↗</a>
 </section>
 
 <!-- REELS (TABS) -->
@@ -107,77 +107,27 @@
   <div class="tabs" role="tablist">
     <button class="tab-btn is-active" role="tab" aria-selected="true" data-tab="rigging">Rigging</button>
     <button class="tab-btn" role="tab" aria-selected="false" data-tab="scripting">Scripting</button>
-    <button class="tab-btn i18n" role="tab" aria-selected="false" data-tab="mocap" data-en="Motion Capture">Motion Capture</button>
+    <button class="tab-btn i18n" role="tab" aria-selected="false" data-tab="mocap" data-i18n="tabs_mocap">Motion Capture</button>
   </div>
 
   <div class="tab-panels">
 
     <div class="tab-panel is-active" id="panel-rigging" role="tabpanel">
       <div class="mini-reel" id="reel-rigging"></div>
-      <div class="work-grid">
-        <div class="work-card">
-          <div class="work-card__thumb">RIG</div>
-          <h3>Cascade Rig System</h3>
-          <p class="i18n" data-en="Modular rig system with an orient → sdk → grp → ctrl hierarchy, built for fast production without giving up animator control.">Sistema de rig modular con jerarquía orient → sdk → grp → ctrl, pensado para producción rápida sin sacrificar control de animador.</p>
-        </div>
-        <div class="work-card">
-          <div class="work-card__thumb">RIG</div>
-          <h3>ikStretchyLeg</h3>
-          <p class="i18n" data-en="Stretchy IK leg with Foot Reversal and Soft IK coming soon.">Pierna IK con stretch y (próximamente) Foot Reversal y Soft IK integrados.</p>
-        </div>
-        <div class="work-card">
-          <div class="work-card__thumb">RIG</div>
-          <h3>Rail Spine</h3>
-          <p class="i18n" data-en="Rail-based spine for fluid deformation on hero characters.">Columna basada en rieles para deformación fluida en personajes hero.</p>
-        </div>
-        <div class="work-card">
-          <div class="work-card__thumb">RIG</div>
-          <h3>TLALOC (UE 5.8)</h3>
-          <p class="i18n" data-en="Mesoamerican deity hero character with Chaos Cloth simulation on the belt (15+ hanging strips) and feather headpiece.">Deidad mesoamericana hero character con simulación Chaos Cloth en cinturón (15+ tiras) y penacho de plumas.</p>
-        </div>
-      </div>
+      <!-- Las tarjetas se generan automáticamente desde work.js -->
+      <div class="work-grid"></div>
     </div>
 
     <div class="tab-panel" id="panel-scripting" role="tabpanel" hidden>
       <div class="mini-reel" id="reel-scripting"></div>
-      <div class="work-grid">
-        <div class="work-card">
-          <div class="work-card__thumb">PY</div>
-          <h3>myTools Compendium</h3>
-          <p class="i18n" data-en="Central launcher in PySide2/PySide6 for all my Maya rigging tools, with window handling via shiboken + MQtUtil.">Launcher central en PySide2/PySide6 para todas mis herramientas de rigging en Maya, con manejo de ventana vía shiboken + MQtUtil.</p>
-        </div>
-        <div class="work-card">
-          <div class="work-card__thumb">PY</div>
-          <h3>Finger Retarget Tool v2.0</h3>
-          <p class="i18n" data-en="Finger retargeting with a versioned preset system.">Retargeting de dedos con sistema de presets versionado.</p>
-        </div>
-        <div class="work-card">
-          <div class="work-card__thumb">PY</div>
-          <h3>FaceCSV Player</h3>
-          <p class="i18n" data-en="Facial capture CSV player/importer, straight into Maya.">Reproductor/importador de datos de captura facial en formato CSV directo en Maya.</p>
-        </div>
-      </div>
+      <!-- Las tarjetas se generan automáticamente desde work.js -->
+      <div class="work-grid"></div>
     </div>
 
     <div class="tab-panel" id="panel-mocap" role="tabpanel" hidden>
       <div class="mini-reel" id="reel-mocap"></div>
-      <div class="work-grid">
-        <div class="work-card">
-          <div class="work-card__thumb">MC</div>
-          <h3>FaceClean</h3>
-          <p class="i18n" data-en="Standalone facial mocap cleanup and retargeting app — video → MediaPipe → ARKit CSV pipeline.">App standalone de limpieza y retargeting de captura facial — pipeline video → MediaPipe → ARKit CSV.</p>
-        </div>
-        <div class="work-card">
-          <div class="work-card__thumb">MC</div>
-          <h3>Pipeline Rokoko + Vicon</h3>
-          <p class="i18n" data-en="Full-body capture with Rokoko Smartsuit Pro and Smartgloves, plus a Vicon lab for high-precision projects.">Captura full-body con Rokoko Smartsuit Pro y Smartgloves, más laboratorio Vicon para proyectos de alta precisión.</p>
-        </div>
-        <div class="work-card">
-          <div class="work-card__thumb">MC</div>
-          <h3 class="i18n" data-en="Marinela — Auditorio Nacional">Marinela — Auditorio Nacional</h3>
-          <p class="i18n" data-en="Full MoCap pipeline for a virtual character in a live performance.">Pipeline completo de MoCap para personaje virtual en presentación en vivo.</p>
-        </div>
-      </div>
+      <!-- Las tarjetas se generan automáticamente desde work.js -->
+      <div class="work-grid"></div>
     </div>
 
   </div>
@@ -198,12 +148,12 @@
     <div class="gumroad-track" id="gumroad-grid"></div>
     <button class="shorts__nav gumroad-nav--next" type="button" aria-label="Siguientes" id="gumroad-nav-next">›</button>
   </div>
-  <a href="https://rayant4.gumroad.com" target="_blank" rel="noopener" class="btn btn--outline i18n" data-en="Visit Gumroad store ↗">Ver tienda en Gumroad ↗</a>
+  <a href="https://rayant4.gumroad.com" target="_blank" rel="noopener" class="btn btn--outline i18n" data-i18n="store_gumroad_link">Ver tienda en Gumroad ↗</a>
 </section>
 
 <!-- CLIENTES -->
 <section class="clients" id="clientes">
-  <p class="section-label i18n" data-en="// 01 — BRANDS I'VE WORKED WITH">// 01 — MARCAS CON LAS QUE HE TRABAJADO</p>
+  <p class="section-label i18n" data-i18n="label_clients">// 01 — MARCAS CON LAS QUE HE TRABAJADO</p>
   <!-- Reel de spots publicitarios — mismo mecanismo que los mini-reels de
        Reels (videos.js -> VIDEOS.reels.clientes); se oculta solo si no hay id -->
   <div class="mini-reel" id="reel-clientes"></div>
@@ -222,7 +172,7 @@
 
 <!-- EXPERIENCIA -->
 <section class="experience" id="experiencia">
-  <p class="section-label i18n" data-en="// 02 — PROFESSIONAL EXPERIENCE">// 02 — EXPERIENCIA PROFESIONAL</p>
+  <p class="section-label i18n" data-i18n="label_experience">// 02 — EXPERIENCIA PROFESIONAL</p>
   <div class="timeline">
 
     <article class="timeline__item">
@@ -230,10 +180,10 @@
       <div class="timeline__card">
         <div class="timeline__card-header">
           <h3>Space Joints</h3>
-          <span class="timeline__date i18n" data-en="2016 — Present">2016 — Presente</span>
+          <span class="timeline__date i18n" data-i18n="exp_spacejoints_date">2016 — Presente</span>
         </div>
         <p class="timeline__role">Founder · VFX Supervisor</p>
-        <p class="timeline__desc i18n" data-en="My own virtual production studio. Leading VFX, motion capture, and real-time pipeline projects for film, TV, advertising, and live events — including TV Azteca commercials for the Qatar and Mexico 2026 World Cups, the VISA World Cup Mexico campaign, and the full MoCap pipeline for Marinela's virtual character at its live performance at Auditorio Nacional.">Estudio de virtual production propio. Dirección de proyectos de VFX, motion capture y pipelines en tiempo real para cine, TV, publicidad y eventos en vivo — incluyendo comerciales de TV Azteca para el Mundial Qatar y México 2026, la campaña VISA Mundial México, y el pipeline completo de MoCap para el personaje virtual de Marinela en su presentación en vivo en el Auditorio Nacional.</p>
+        <p class="timeline__desc i18n" data-i18n="exp_spacejoints_desc">Estudio de virtual production propio. Dirección de proyectos de VFX, motion capture y pipelines en tiempo real para cine, TV, publicidad y eventos en vivo — incluyendo comerciales de TV Azteca para el Mundial Qatar y México 2026, la campaña VISA Mundial México, y el pipeline completo de MoCap para el personaje virtual de Marinela en su presentación en vivo en el Auditorio Nacional.</p>
       </div>
     </article>
 
@@ -245,7 +195,7 @@
           <span class="timeline__date"></span>
         </div>
         <p class="timeline__role">MoCap Supervisor · VFX Supervisor</p>
-        <p class="timeline__desc i18n" data-en="Supervised motion capture and visual effects depending on the project — multidisciplinary work across different productions.">Supervisión de captura de movimiento y de efectos visuales según el proyecto — participación multidisciplinaria a lo largo de distintas producciones.</p>
+        <p class="timeline__desc i18n" data-i18n="exp_orionn_desc">Supervisión de captura de movimiento y de efectos visuales según el proyecto — participación multidisciplinaria a lo largo de distintas producciones.</p>
       </div>
     </article>
 
@@ -256,8 +206,8 @@
           <h3>3D Lala Studio</h3>
           <span class="timeline__date"></span>
         </div>
-        <p class="timeline__role i18n" data-en="Character Rigger">Character Rigger</p>
-        <p class="timeline__desc i18n" data-en="Character rigging for 3D production.">Rigging de personajes para producción 3D.</p>
+        <p class="timeline__role i18n" data-i18n="exp_lala_role">Character Rigger</p>
+        <p class="timeline__desc i18n" data-i18n="exp_lala_desc">Rigging de personajes para producción 3D.</p>
       </div>
     </article>
 
@@ -266,7 +216,7 @@
 
 <!-- COMPETENCIAS -->
 <section class="skills" id="competencias">
-  <p class="section-label i18n" data-en="// 03 — TECHNICAL SKILLS">// 03 — COMPETENCIAS TÉCNICAS</p>
+  <p class="section-label i18n" data-i18n="label_skills">// 03 — COMPETENCIAS TÉCNICAS</p>
   <div class="skills__grid">
 
     <div class="skill-card">
@@ -289,7 +239,7 @@
 
     <div class="skill-card">
       <span class="skill-card__index">03</span>
-      <h3 class="i18n" data-en="Motion Capture">Motion Capture</h3>
+      <h3 class="i18n" data-i18n="skill_mocap">Motion Capture</h3>
       <div class="skill-card__tags">
         <span class="tag">Rokoko</span>
         <span class="tag">Vicon</span>
@@ -299,7 +249,7 @@
 
     <div class="skill-card">
       <span class="skill-card__index">04</span>
-      <h3 class="i18n" data-en="Simulation &amp; XR">Simulación &amp; XR</h3>
+      <h3 class="i18n" data-i18n="skill_sim">Simulación &amp; XR</h3>
       <div class="skill-card__tags">
         <span class="tag">Chaos Cloth</span>
         <span class="tag">XR</span>
@@ -313,11 +263,11 @@
 
 <!-- EDUCACIÓN -->
 <section class="education">
-  <p class="section-label i18n" data-en="// 04 — EDUCATION">// 04 — EDUCACIÓN</p>
+  <p class="section-label i18n" data-i18n="label_education">// 04 — EDUCACIÓN</p>
   <div class="education__grid">
     <div class="edu-card">
       <span class="edu-card__tag">MBA</span>
-      <h3 class="i18n" data-en="Master of Business Administration">Maestría en Administración de Negocios</h3>
+      <h3 class="i18n" data-i18n="edu_mba">Maestría en Administración de Negocios</h3>
     </div>
     <div class="edu-card">
       <span class="edu-card__tag">B.Eng.</span>
@@ -329,8 +279,8 @@
 
 <!-- CONTACTO -->
 <footer class="contact" id="contacto">
-  <p class="section-label i18n" data-en="// 05 — CONTACT">// 05 — CONTACTO</p>
-  <h2 class="contact__headline i18n" data-en="Let's build something together?">¿Hacemos algo juntos?</h2>
+  <p class="section-label i18n" data-i18n="label_contact">// 05 — CONTACTO</p>
+  <h2 class="contact__headline i18n" data-i18n="contact_headline">¿Hacemos algo juntos?</h2>
 
   <div class="contact__grid">
     <a href="mailto:spacejoints.79@gmail.com" class="contact-block">
@@ -342,14 +292,14 @@
       <span class="contact-block__value">/in/antonmr</span>
     </a>
     <a href="tel:" class="contact-block" id="phone-block">
-      <span class="contact-block__label i18n" data-en="PHONE">TELÉFONO</span>
-      <span class="contact-block__value i18n" data-en="Add number">Añadir número</span>
+      <span class="contact-block__label i18n" data-i18n="contact_phone_label">TELÉFONO</span>
+      <span class="contact-block__value i18n" data-i18n="contact_phone_value">Añadir número</span>
     </a>
   </div>
 
   <div class="contact__footer-bottom">
     <span>SPACE JOINTS © 2026</span>
-    <span class="i18n" data-en="Designed and built by Anton Ray">Diseñado y construido por Anton Ray</span>
+    <span class="i18n" data-i18n="footer_credit">Diseñado y construido por Anton Ray</span>
   </div>
 </footer>
 
@@ -367,7 +317,9 @@
      que agrega script.js (desde products.js) en la vista previa real del
      producto: miniatura, precio y botón "I want this!" -->
 <script src="https://gumroad.com/js/gumroad-embed.js"></script>
+<script src="i18n.js"></script>
 <script src="videos.js"></script>
+<script src="work.js"></script>
 <script src="products.js"></script>
 <script src="script.js"></script>
 </body>

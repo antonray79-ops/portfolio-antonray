@@ -17,14 +17,29 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  // --- Videos: everything below reads from videos.js (window.VIDEOS) ---
-  // so adding/removing a clip is just editing that file, never this one.
+  // --- Datos: todo el contenido (textos ES/EN, videos, tarjetas de trabajo,
+  // productos) vive en i18n.js / videos.js / work.js / products.js —
+  // agregar o editar algo ahí nunca requiere tocar este archivo.
+  const hasI18n = typeof I18N !== 'undefined';
   const hasVideos = typeof VIDEOS !== 'undefined';
-  if (!hasVideos) {
-    console.warn('videos.js no se cargó — revisa que esté antes de script.js en index.html');
-  }
+  const hasWork = typeof WORK !== 'undefined';
+  const hasProducts = typeof PRODUCTS !== 'undefined';
+  if (!hasI18n) console.warn('i18n.js no se cargó — revisa que esté antes de script.js en index.html');
+  if (!hasVideos) console.warn('videos.js no se cargó — revisa que esté antes de script.js en index.html');
+  if (!hasWork) console.warn('work.js no se cargó — revisa que esté antes de script.js en index.html');
+  if (!hasProducts) console.warn('products.js no se cargó — revisa que esté antes de script.js en index.html');
 
-  // Reel modal — "Ver Reel" (hero) y "Rigging" (menú Reels) abren el demo
+  // Escapa texto para meterlo seguro dentro de HTML/atributos (se usa en
+  // todas las secciones de abajo que arman tarjetas desde los .js de datos).
+  const escapeHTML = (str) => String(str || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+  const escapeAttr = (str) => escapeHTML(str).replace(/"/g, '&quot;');
+
+  // ------------------------------------------------------------
+  // SECCIÓN: REEL MODAL
+  // ------------------------------------------------------------ — "Ver Reel" (hero) y "Rigging" (menú Reels) abren el demo
   // reel en una ventana sobrepuesta en vez de bajar hasta la sección #reel.
   // Mismo truco de mute+autoplay que los shorts, para que funcione parejo
   // en iOS desde el primer tap.
@@ -70,6 +85,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'Escape' && reelModal?.classList.contains('is-open')) closeReelModal();
   });
 
+  // ------------------------------------------------------------
+  // SECCIÓN: MINI-REEL POR PESTAÑA
+  // ------------------------------------------------------------
   // Reel opcional por pestaña dentro de la sección Reels
   if (hasVideos && VIDEOS.reels) {
     Object.keys(VIDEOS.reels).forEach((tabName) => {
@@ -87,15 +105,40 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Breakdowns opcionales por pestaña (videos.js -> VIDEOS.breakdowns) —
-  // se agregan como tarjetas dentro de la MISMA cuadrícula que "Cascade
+  // ------------------------------------------------------------
+  // SECCIÓN: TARJETAS DE TRABAJO (work.js -> WORK)
+  // ------------------------------------------------------------
+  // "Cascade Rig System", "myTools Compendium", "FaceClean", etc. — el
+  // contenido de cada pestaña vive en work.js; aquí solo se arma el HTML.
+  if (hasWork) {
+    Object.keys(WORK).forEach((tabName) => {
+      const grid = document.querySelector(`#panel-${tabName} .work-grid`);
+      const items = WORK[tabName] || [];
+      if (!grid) return;
+
+      grid.innerHTML = items.map((item) => {
+        const titleHTML = item.titleEn
+          ? `<h3 class="i18n" data-en="${escapeAttr(item.titleEn)}">${escapeHTML(item.title)}</h3>`
+          : `<h3>${escapeHTML(item.title || '')}</h3>`;
+        return `
+          <div class="work-card">
+            <div class="work-card__thumb">${escapeHTML(item.thumb || '')}</div>
+            ${titleHTML}
+            <p class="i18n" data-en="${escapeAttr(item.descEn || '')}">${item.desc || ''}</p>
+          </div>`;
+      }).join('');
+    });
+  }
+
+  // ------------------------------------------------------------
+  // SECCIÓN: BREAKDOWNS (videos.js -> VIDEOS.breakdowns)
+  // ------------------------------------------------------------
+  // Se agregan como tarjetas dentro de la MISMA cuadrícula que "Cascade
   // Rig System" etc. (con miniatura en vez de descripción). Al hacerles
   // clic, el video se reproduce ARRIBA, en el mini-reel principal de esa
   // pestaña — nunca en ventana aparte, y el demo principal sigue siendo
   // lo primero que se ve al entrar a la pestaña.
   if (hasVideos && VIDEOS.breakdowns) {
-    const escapeAttr = (str) => String(str || '').replace(/"/g, '&quot;');
-
     Object.keys(VIDEOS.breakdowns).forEach((tabName) => {
       const items = (VIDEOS.breakdowns[tabName] || []).filter((b) => b && b.id);
       const grid = document.querySelector(`#panel-${tabName} .work-grid`);
@@ -136,6 +179,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // ------------------------------------------------------------
+  // SECCIÓN: TIRA DE SHORTS (tarjetas)
+  // ------------------------------------------------------------
   // Tarjetas de la tira de shorts (dobladas para el loop infinito)
   const shortsTrackEl = document.getElementById('shorts-track');
   if (shortsTrackEl && hasVideos && Array.isArray(VIDEOS.shorts)) {
@@ -152,16 +198,13 @@ document.addEventListener('DOMContentLoaded', () => {
       ids.map((id) => cardHTML(id, true)).join('');
   }
 
+  // ------------------------------------------------------------
+  // SECCIÓN: TIENDA / GUMROAD (products.js -> PRODUCTS)
+  // ------------------------------------------------------------
   // Tarjetas de la pestaña Gumroad, con botón "Comprar" real cuando la
   // liga ya está puesta en products.js
   const gumroadGrid = document.getElementById('gumroad-grid');
-  const hasProducts = typeof PRODUCTS !== 'undefined';
-  if (!hasProducts) {
-    console.warn('products.js no se cargó — revisa que esté antes de script.js en index.html');
-  }
   if (gumroadGrid && hasProducts && Array.isArray(PRODUCTS.stores?.gumroad)) {
-    const escapeAttr = (str) => String(str || '').replace(/"/g, '&quot;');
-
     gumroadGrid.innerHTML = PRODUCTS.stores.gumroad.map((p) => {
       // Con id + url puestos, mostramos la vista previa real de Gumroad
       // (miniatura, precio, botón "I want this!") en vez de una tarjeta
@@ -192,7 +235,9 @@ document.addEventListener('DOMContentLoaded', () => {
     gumroadGrid?.scrollBy({ left: 300, behavior: 'smooth' });
   });
 
-  // --- Mobile nav (hamburger) ---
+  // ------------------------------------------------------------
+  // SECCIÓN: NAV MÓVIL (hamburguesa)
+  // ------------------------------------------------------------
   const navToggle = document.getElementById('hud-nav-toggle');
   const navLinks = document.getElementById('hud-nav-links');
 
@@ -212,7 +257,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (window.innerWidth > 720) closeMobileNav();
   });
 
-  // --- Scroll-reveal for section labels + timeline items ---
+  // ------------------------------------------------------------
+  // SECCIÓN: SCROLL-REVEAL (labels + timeline)
+  // ------------------------------------------------------------
   const revealTargets = document.querySelectorAll('.section-label, .timeline__item');
 
   if ('IntersectionObserver' in window) {
@@ -231,7 +278,9 @@ document.addEventListener('DOMContentLoaded', () => {
     revealTargets.forEach((el) => el.classList.add('is-visible'));
   }
 
-  // --- Work tabs ---
+  // ------------------------------------------------------------
+  // SECCIÓN: TABS DE REELS
+  // ------------------------------------------------------------
   const tabButtons = document.querySelectorAll('.tab-btn');
   const tabPanels = document.querySelectorAll('.tab-panel');
 
@@ -255,7 +304,9 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.addEventListener('click', () => activateTab(btn.dataset.tab));
   });
 
-  // --- Language toggle (ES / EN) ---
+  // ------------------------------------------------------------
+  // SECCIÓN: IDIOMA (ES / EN)
+  // ------------------------------------------------------------
   const i18nEls = document.querySelectorAll('.i18n');
   const langButtons = document.querySelectorAll('.lang-btn');
 
@@ -264,9 +315,19 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!el.dataset.es) el.dataset.es = el.innerHTML;
   });
 
+  // Texto en inglés de un elemento .i18n: si trae data-i18n="key" lo busca
+  // en el diccionario de i18n.js (texto estático del sitio); si trae
+  // data-en="..." directo en el atributo, lo usa tal cual (así es como lo
+  // arman work.js/videos.js/products.js para sus propias tarjetas).
+  function englishFor(el) {
+    const key = el.dataset.i18n;
+    if (key) return hasI18n && I18N[key] !== undefined ? I18N[key] : el.dataset.es;
+    return el.dataset.en !== undefined ? el.dataset.en : el.dataset.es;
+  }
+
   function setLanguage(lang) {
     i18nEls.forEach((el) => {
-      el.innerHTML = lang === 'en' ? el.dataset.en : el.dataset.es;
+      el.innerHTML = lang === 'en' ? englishFor(el) : el.dataset.es;
     });
     langButtons.forEach((btn) => {
       btn.classList.toggle('is-active', btn.dataset.lang === lang);
@@ -283,7 +344,9 @@ document.addEventListener('DOMContentLoaded', () => {
   try { savedLang = localStorage.getItem('antonray-lang') || 'es'; } catch (e) { /* storage unavailable, ignore */ }
   if (savedLang === 'en') setLanguage('en');
 
-  // --- Jump to a specific Reels tab (nav dropdown + hero quicklinks) ---
+  // ------------------------------------------------------------
+  // SECCIÓN: SALTAR A UNA PESTAÑA DE REELS (menú + botones del hero)
+  // ------------------------------------------------------------
   // "Rigging" in the nav dropdown opens the demo reel modal instead (it's a
   // plain #reel link with no data-tab), so it falls through to the generic
   // smooth-scroll handler below instead of being caught here.
@@ -297,7 +360,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // --- Shorts strip: auto-scroll, drag-to-scroll, arrows, infinite loop ---
+  // ------------------------------------------------------------
+  // SECCIÓN: TIRA DE SHORTS (auto-scroll, drag, flechas, reproductor)
+  // ------------------------------------------------------------
   const marquee = document.querySelector('.shorts__marquee');
   const track = document.querySelector('.shorts__track');
 
@@ -470,7 +535,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- Smooth-scroll for in-page nav links ---
+  // ------------------------------------------------------------
+  // SECCIÓN: SMOOTH-SCROLL para links internos (#ancla)
+  // ------------------------------------------------------------
   document.querySelectorAll('a[href^="#"]').forEach((link) => {
     if (link.classList.contains('open-reel-modal')) return; // handled by the reel modal
     if (link.closest('.nav-dropdown__menu') && link.dataset.tab) return; // handled above

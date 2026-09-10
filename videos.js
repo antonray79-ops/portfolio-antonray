@@ -65,9 +65,9 @@ const VIDEOS = {
       // { id: "idDelVideo", title: "Cascade Rig — Breakdown" },
     ],
     scripting: [
-      { id: "0jXV3S4JmKc" }, // https://youtu.be/0jXV3S4JmKc
-      { id: "Xx6XWnbGFnM" }, // https://youtu.be/Xx6XWnbGFnM
-      { id: "AGLhBjdmCzk" }, // https://youtu.be/AGLhBjdmCzk
+      { id: "0jXV3S4JmKc", title: "FacialPoseBuilder — How To Use" }, // https://youtu.be/0jXV3S4JmKc
+      { id: "Xx6XWnbGFnM", title: "Finger Retargeter v1.0 — Retarget Mocap Fingers to Rig Controls" }, // https://youtu.be/Xx6XWnbGFnM
+      { id: "AGLhBjdmCzk", title: "FaceCSVPlayer — Install & Use Guide" }, // https://youtu.be/AGLhBjdmCzk
     ],
     mocap: [
       // { id: "idDelVideo", title: "FaceClean — Breakdown" },
