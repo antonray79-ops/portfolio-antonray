@@ -160,3 +160,31 @@
   letter-spacing: 0.02em;
   padding: 18px 20px 20px;
 }
+
+/* En pantallas angostas, un grid de puros videos de breakdown (como
+   Scripting ahora, que no tiene tarjetas de texto) se apila uno debajo
+   del otro a ancho completo — hay que bajar para llegar al segundo y
+   tercero. Si el grid tiene AL MENOS un video, lo convertimos en tira
+   horizontal (como Shorts/Clientes) para que se vean varios de un
+   vistazo y no haya que bajar para darle play. Las tarjetas de texto
+   (sin video, ej. Rigging/Motion Capture hoy) no se tocan. */
+@media (max-width: 600px) {
+  .work-grid:has(.work-card--video) {
+    display: flex;
+    overflow-x: auto;
+    gap: 14px;
+    margin: 0 -20px 32px;
+    padding: 4px 20px 10px;
+    scroll-snap-type: x proximity;
+    -webkit-mask-image: linear-gradient(to right, transparent, black 20px, black calc(100% - 20px), transparent);
+    mask-image: linear-gradient(to right, transparent, black 20px, black calc(100% - 20px), transparent);
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .work-grid:has(.work-card--video)::-webkit-scrollbar { display: none; }
+  .work-grid:has(.work-card--video) .work-card {
+    flex: 0 0 210px;
+    width: 210px;
+    scroll-snap-align: start;
+  }
+}
