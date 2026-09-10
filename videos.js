@@ -65,7 +65,9 @@ const VIDEOS = {
       // { id: "idDelVideo", title: "Cascade Rig — Breakdown" },
     ],
     scripting: [
-      // { id: "idDelVideo", title: "myTools — Breakdown" },
+      { id: "0jXV3S4JmKc" }, // https://youtu.be/0jXV3S4JmKc
+      { id: "Xx6XWnbGFnM" }, // https://youtu.be/Xx6XWnbGFnM
+      { id: "AGLhBjdmCzk" }, // https://youtu.be/AGLhBjdmCzk
     ],
     mocap: [
       // { id: "idDelVideo", title: "FaceClean — Breakdown" },
