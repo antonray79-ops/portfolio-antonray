@@ -197,7 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
     marquee.addEventListener('touchend', endDrag);
 
     // Arrow buttons
-    const step = 258; // card width (240) + gap (18)
+    const step = 168; // card width (150) + gap (18)
     document.querySelector('.shorts__nav--prev')?.addEventListener('click', () => {
       pauseAutoTemporarily();
       marquee.scrollBy({ left: -step, behavior: 'smooth' });
@@ -207,14 +207,19 @@ document.addEventListener('DOMContentLoaded', () => {
       marquee.scrollBy({ left: step, behavior: 'smooth' });
     });
 
-    // Play a short right inside its own card (no popup, no leaving the page):
-    // centers it in the strip, scales it up a touch, and dims its neighbors
-    // so it reads as the thing in focus.
-    function playInline(card) {
-      if (card.classList.contains('is-playing')) return;
-      document.querySelectorAll('.shorts__card.is-playing').forEach(stopInline);
+    // Featured player panel: opens above the strip (like a tab) instead of
+    // growing a thumbnail in place — always centered, never clipped.
+    const shortsPlayer = document.getElementById('shorts-player');
+    const shortsPlayerFrame = shortsPlayer?.querySelector('.shorts__player-frame');
+    const shortsPlayerClose = document.getElementById('shorts-player-close');
+    let activeCard = null;
+
+    function openPlayer(card) {
+      if (!shortsPlayer || !shortsPlayerFrame) return;
 
       const videoId = card.dataset.videoId;
+      shortsPlayerFrame.querySelector('iframe')?.remove();
+
       const iframe = document.createElement('iframe');
       // muted + autoplay: iOS Safari refuses unmuted autoplay even from a
       // real tap, which made the first tap "open" the player without
@@ -225,28 +230,28 @@ document.addEventListener('DOMContentLoaded', () => {
       iframe.setAttribute('frameborder', '0');
       iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
       iframe.setAttribute('allowfullscreen', '');
-      card.appendChild(iframe);
-      card.classList.add('is-playing', 'is-focused');
-      marquee.classList.add('has-active');
+      shortsPlayerFrame.appendChild(iframe);
+      shortsPlayer.classList.add('is-open');
+
+      if (activeCard) activeCard.classList.remove('is-active');
+      card.classList.add('is-active');
+      activeCard = card;
 
       clearTimeout(resumeTimer);
-      autoPaused = true; // don't scroll a card away while it's playing
+      autoPaused = true;
 
-      // Center it in the strip once it has its focused (bigger) size.
-      requestAnimationFrame(() => {
-        card.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-      });
+      shortsPlayer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 
-    function stopInline(card) {
-      const iframe = card.querySelector('iframe');
-      if (iframe) iframe.remove();
-      card.classList.remove('is-playing', 'is-focused');
-      if (!document.querySelector('.shorts__card.is-playing')) {
-        marquee.classList.remove('has-active');
-        autoPaused = false;
-      }
+    function closePlayer() {
+      shortsPlayerFrame?.querySelector('iframe')?.remove();
+      shortsPlayer?.classList.remove('is-open');
+      if (activeCard) activeCard.classList.remove('is-active');
+      activeCard = null;
+      autoPaused = false;
     }
+
+    shortsPlayerClose?.addEventListener('click', closePlayer);
 
     document.querySelectorAll('.shorts__card').forEach((card) => {
       card.addEventListener('click', (e) => {
@@ -256,12 +261,7 @@ document.addEventListener('DOMContentLoaded', () => {
           wasDragging = false;
           return;
         }
-        if (e.target.closest('.shorts__card-close')) {
-          e.stopPropagation();
-          stopInline(card);
-          return;
-        }
-        playInline(card);
+        openPlayer(card);
       });
     });
   }
