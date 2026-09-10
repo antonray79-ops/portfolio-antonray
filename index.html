@@ -201,8 +201,13 @@
 
     <div class="tab-panel" id="panel-gumroad" role="tabpanel" hidden>
       <div class="mini-reel" id="reel-gumroad"></div>
-      <!-- Las tarjetas se generan automáticamente desde products.js -->
-      <div class="work-grid" id="gumroad-grid"></div>
+      <!-- Tira horizontal (como los shorts) — las tarjetas se generan
+           automáticamente desde products.js -->
+      <div class="gumroad-strip">
+        <button class="shorts__nav gumroad-nav--prev" type="button" aria-label="Anteriores" id="gumroad-nav-prev">‹</button>
+        <div class="gumroad-track" id="gumroad-grid"></div>
+        <button class="shorts__nav gumroad-nav--next" type="button" aria-label="Siguientes" id="gumroad-nav-next">›</button>
+      </div>
       <a href="https://rayant4.gumroad.com" target="_blank" rel="noopener" class="btn btn--outline i18n" data-en="Visit Gumroad store ↗">Ver tienda en Gumroad ↗</a>
     </div>
 

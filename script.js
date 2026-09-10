@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // hecha a mano — gumroad-embed.js la arma sola al cargar la página.
       if (p.id && p.url) {
         return `
-          <div class="gumroad-embed-wrap">
+          <div class="gumroad-card gumroad-embed-wrap">
             <div class="gumroad-product-embed" data-gumroad-product-id="${p.id}">
               <a href="${p.url}">Loading...</a>
             </div>
@@ -87,13 +87,21 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       // Sin id/url todavía: tarjeta de texto simple como respaldo.
       return `
-        <div class="work-card">
+        <div class="gumroad-card work-card">
           <div class="work-card__thumb">GR</div>
           <h3>${p.title}</h3>
           <p class="i18n" data-en="${escapeAttr(p.descEn)}">${p.desc || ''}</p>
         </div>`;
     }).join('');
   }
+
+  // Flechas de la tira de Gumroad (misma idea que las de la tira de shorts)
+  document.getElementById('gumroad-nav-prev')?.addEventListener('click', () => {
+    gumroadGrid?.scrollBy({ left: -300, behavior: 'smooth' });
+  });
+  document.getElementById('gumroad-nav-next')?.addEventListener('click', () => {
+    gumroadGrid?.scrollBy({ left: 300, behavior: 'smooth' });
+  });
 
   // --- Mobile nav (hamburger) ---
   const navToggle = document.getElementById('hud-nav-toggle');
