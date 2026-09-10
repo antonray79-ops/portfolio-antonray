@@ -386,16 +386,16 @@ a { color: inherit; text-decoration: none; }
   font-size: 12px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  border: 1px solid var(--amber);
-  color: var(--amber);
+  border: 1px solid var(--cyan);
+  color: var(--cyan);
   background: transparent;
   border-radius: 2px;
   transition: all 0.3s var(--ease);
 }
 .hero__quicklink:hover {
-  background: var(--amber);
+  background: var(--cyan);
   color: var(--black);
-  box-shadow: 0 0 20px rgba(255,180,84,0.25);
+  box-shadow: 0 0 20px rgba(94,230,230,0.3);
 }
 
 .hero__scroll {
