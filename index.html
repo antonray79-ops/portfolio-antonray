@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anton Ray — Creative Producer · VFX Supervisor · Rigging TD</title>
+<meta name="description" content="Anton Ray (Vizeonic) — Creative Producer, VFX Supervisor y Rigging TD en Ciudad de México. Honda, TV Azteca, VISA, Marinela, L'Oréal, Telcel, Volaris.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="grain-overlay"></div>
+<div class="rec-indicator"><span class="rec-dot"></span>REC</div>
+
+<nav class="hud-nav">
+  <div class="hud-nav__brand">ANTON RAY</div>
+  <div class="hud-nav__links">
+    <div class="nav-dropdown">
+      <a href="#reels" class="nav-dropdown__trigger i18n" data-en="Reels">Reels <span class="nav-dropdown__caret">▾</span></a>
+      <div class="nav-dropdown__menu">
+        <a href="#reels" data-tab="rigging">Rigging</a>
+        <a href="#reels" data-tab="scripting">Scripting</a>
+        <a href="#reels" data-tab="mocap" class="i18n" data-en="Motion Capture">Motion Capture</a>
+        <a href="#reels" data-tab="gumroad">Gumroad</a>
+      </div>
+    </div>
+    <a href="#clientes" class="i18n" data-en="Clients">Clientes</a>
+    <a href="#experiencia" class="i18n" data-en="Experience">Experiencia</a>
+    <a href="#competencias" class="i18n" data-en="Skills">Competencias</a>
+    <a href="#contacto" class="i18n" data-en="Contact">Contacto</a>
+  </div>
+  <div class="lang-toggle" role="group" aria-label="Idioma / Language">
+    <button type="button" class="lang-btn is-active" data-lang="es">ES</button>
+    <span class="lang-toggle__sep">/</span>
+    <button type="button" class="lang-btn" data-lang="en">EN</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="hero">
+  <div class="hero__corner hero__corner--tl"></div>
+  <div class="hero__corner hero__corner--tr"></div>
+  <div class="hero__corner hero__corner--bl"></div>
+  <div class="hero__corner hero__corner--br"></div>
+
+  <div class="hero__content">
+    <p class="hero__eyebrow">VIZEONIC · CIUDAD DE MÉXICO</p>
+    <h1 class="hero__name">ANTON RAY</h1>
+    <p class="hero__alias">Antonio Mexicano</p>
+    <h2 class="hero__title">Creative Producer <span class="hero__dot">·</span> VFX Supervisor <span class="hero__dot">·</span> Rigging TD</h2>
+    <p class="hero__tagline i18n" data-en="10+ years bringing characters to life across film, TV, games, and virtual production — from the first meeting to the final render.">10+ años dando vida a personajes en cine, TV, videojuegos y virtual production — de la primera junta al render final.</p>
+    <a href="#reel" class="btn btn--primary">
+      <span class="btn__icon">▶</span> <span class="i18n" data-en="Watch Reel">Ver Reel</span>
+    </a>
+  </div>
+
+  <div class="hero__scroll">
+    <span>SCROLL</span>
+    <div class="hero__scroll-line"></div>
+  </div>
+</header>
+
+<!-- SHORTS -->
+<section class="shorts">
+  <p class="section-label">// CLIPS</p>
+  <div class="shorts__grid">
+    <div class="shorts__item">
+      <iframe
+        src="https://www.youtube.com/embed/XJ4pn3oDILU"
+        title="Anton Ray — Short"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen>
+      </iframe>
+    </div>
+    <div class="shorts__item">
+      <iframe
+        src="https://www.youtube.com/embed/XCvin_4PB4w"
+        title="Anton Ray — Short"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+  <a href="https://www.youtube.com/@AntonRaySJ" target="_blank" rel="noopener" class="shorts__more i18n" data-en="More clips on YouTube ↗">Más clips en YouTube ↗</a>
+</section>
+
+<!-- REEL -->
+<section class="reel" id="reel">
+  <div class="reel__frame">
+    <div class="reel__hud reel__hud--top">
+      <span>ANTON_RAY_REEL_2026.MOV</span>
+      <span>4K · 24FPS</span>
+    </div>
+    <a class="reel__video" href="https://youtu.be/hp48qOfm4yo" target="_blank" rel="noopener" aria-label="Ver demo reel en YouTube">
+      <img src="https://img.youtube.com/vi/hp48qOfm4yo/maxresdefault.jpg" alt="Anton Ray — Demo Reel thumbnail" loading="lazy">
+      <span class="reel__play-btn">▶</span>
+    </a>
+    <div class="reel__hud reel__hud--bottom">
+      <span>00:00 / 01:32</span>
+      <span>VIZEONIC © 2026</span>
+    </div>
+  </div>
+</section>
+
+<!-- REELS (TABS) -->
+<section class="work" id="reels">
+  <p class="section-label">// REELS</p>
+
+  <div class="tabs" role="tablist">
+    <button class="tab-btn is-active" role="tab" aria-selected="true" data-tab="rigging">Rigging</button>
+    <button class="tab-btn" role="tab" aria-selected="false" data-tab="scripting">Scripting</button>
+    <button class="tab-btn i18n" role="tab" aria-selected="false" data-tab="mocap" data-en="Motion Capture">Motion Capture</button>
+    <button class="tab-btn" role="tab" aria-selected="false" data-tab="gumroad">Gumroad</button>
+  </div>
+
+  <div class="tab-panels">
+
+    <div class="tab-panel is-active" id="panel-rigging" role="tabpanel">
+      <div class="work-grid">
+        <div class="work-card">
+          <div class="work-card__thumb">RIG</div>
+          <h3>Cascade Rig System</h3>
+          <p class="i18n" data-en="Modular rig system with an orient → sdk → grp → ctrl hierarchy, built for fast production without giving up animator control.">Sistema de rig modular con jerarquía orient → sdk → grp → ctrl, pensado para producción rápida sin sacrificar control de animador.</p>
+        </div>
+        <div class="work-card">
+          <div class="work-card__thumb">RIG</div>
+          <h3>ikStretchyLeg</h3>
+          <p class="i18n" data-en="Stretchy IK leg with Foot Reversal and Soft IK coming soon.">Pierna IK con stretch y (próximamente) Foot Reversal y Soft IK integrados.</p>
+        </div>
+        <div class="work-card">
+          <div class="work-card__thumb">RIG</div>
+          <h3>Rail Spine</h3>
+          <p class="i18n" data-en="Rail-based spine for fluid deformation on hero characters.">Columna basada en rieles para deformación fluida en personajes hero.</p>
+        </div>
+        <div class="work-card">
+          <div class="work-card__thumb">RIG</div>
+          <h3>TLALOC (UE 5.8)</h3>
+          <p class="i18n" data-en="Mesoamerican deity hero character with Chaos Cloth simulation on the belt (15+ hanging strips) and feather headpiece.">Deidad mesoamericana hero character con simulación Chaos Cloth en cinturón (15+ tiras) y penacho de plumas.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="panel-scripting" role="tabpanel" hidden>
+      <div class="work-grid">
+        <div class="work-card">
+          <div class="work-card__thumb">PY</div>
+          <h3>myTools Compendium</h3>
+          <p class="i18n" data-en="Central launcher in PySide2/PySide6 for all my Maya rigging tools, with window handling via shiboken + MQtUtil.">Launcher central en PySide2/PySide6 para todas mis herramientas de rigging en Maya, con manejo de ventana vía shiboken + MQtUtil.</p>
+        </div>
+        <div class="work-card">
+          <div class="work-card__thumb">PY</div>
+          <h3>Finger Retarget Tool v2.0</h3>
+          <p class="i18n" data-en="Finger retargeting with a versioned preset system.">Retargeting de dedos con sistema de presets versionado.</p>
+        </div>
+        <div class="work-card">
+          <div class="work-card__thumb">PY</div>
+          <h3>FaceCSV Player</h3>
+          <p class="i18n" data-en="Facial capture CSV player/importer, straight into Maya.">Reproductor/importador de datos de captura facial en formato CSV directo en Maya.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="panel-mocap" role="tabpanel" hidden>
+      <div class="work-grid">
+        <div class="work-card">
+          <div class="work-card__thumb">MC</div>
+          <h3>FaceClean</h3>
+          <p class="i18n" data-en="Standalone facial mocap cleanup and retargeting app — video → MediaPipe → ARKit CSV pipeline.">App standalone de limpieza y retargeting de captura facial — pipeline video → MediaPipe → ARKit CSV.</p>
+        </div>
+        <div class="work-card">
+          <div class="work-card__thumb">MC</div>
+          <h3>Pipeline Rokoko + Vicon</h3>
+          <p class="i18n" data-en="Full-body capture with Rokoko Smartsuit Pro and Smartgloves, plus a Vicon lab for high-precision projects.">Captura full-body con Rokoko Smartsuit Pro y Smartgloves, más laboratorio Vicon para proyectos de alta precisión.</p>
+        </div>
+        <div class="work-card">
+          <div class="work-card__thumb">MC</div>
+          <h3 class="i18n" data-en="Marinela — Auditorio Nacional">Marinela — Auditorio Nacional</h3>
+          <p class="i18n" data-en="Full MoCap pipeline for a virtual character in a live performance.">Pipeline completo de MoCap para personaje virtual en presentación en vivo.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="panel-gumroad" role="tabpanel" hidden>
+      <div class="work-grid">
+        <div class="work-card">
+          <div class="work-card__thumb">GR</div>
+          <h3>Finger Retarget Tool</h3>
+          <p class="i18n" data-en="Commercial finger retargeting tool for Maya.">Herramienta comercial de retargeting de dedos para Maya.</p>
+        </div>
+        <div class="work-card">
+          <div class="work-card__thumb">GR</div>
+          <h3>PoseSaverFaceTool</h3>
+          <p class="i18n" data-en="Save and recall facial poses for character animation.">Guardado y recall de poses faciales para animación de personajes.</p>
+        </div>
+        <div class="work-card">
+          <div class="work-card__thumb">GR</div>
+          <h3>Ribbon Script</h3>
+          <p class="i18n" data-en="Ribbon system generator for high-deformation rigs.">Generador de sistemas ribbon para rigs de alta deformación.</p>
+        </div>
+      </div>
+      <a href="https://rayant4.gumroad.com" target="_blank" rel="noopener" class="btn btn--outline i18n" data-en="Visit Gumroad store ↗">Ver tienda en Gumroad ↗</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- CLIENTES -->
+<section class="clients" id="clientes">
+  <p class="section-label i18n" data-en="// 01 — BRANDS I'VE WORKED WITH">// 01 — MARCAS CON LAS QUE HE TRABAJADO</p>
+  <div class="clients__grid">
+    <div class="client-chip">Honda México</div>
+    <div class="client-chip">TV Azteca</div>
+    <div class="client-chip">Marinela · Grupo Bimbo</div>
+    <div class="client-chip">VISA</div>
+    <div class="client-chip">Garnier</div>
+    <div class="client-chip">CeraVe</div>
+    <div class="client-chip">Maybelline</div>
+    <div class="client-chip">Telcel</div>
+    <div class="client-chip">Volaris</div>
+  </div>
+</section>
+
+<!-- EXPERIENCIA -->
+<section class="experience" id="experiencia">
+  <p class="section-label i18n" data-en="// 02 — PROFESSIONAL EXPERIENCE">// 02 — EXPERIENCIA PROFESIONAL</p>
+  <div class="timeline">
+
+    <article class="timeline__item">
+      <div class="timeline__marker"></div>
+      <div class="timeline__card">
+        <div class="timeline__card-header">
+          <h3>Vizeonic</h3>
+          <span class="timeline__date i18n" data-en="2016 — Present">2016 — Presente</span>
+        </div>
+        <p class="timeline__role">Founder · VFX Supervisor</p>
+        <p class="timeline__desc i18n" data-en="My own virtual production studio. Leading VFX, motion capture, and real-time pipeline projects for film, TV, advertising, and live events — including TV Azteca commercials for the Qatar and Mexico 2026 World Cups, the VISA World Cup Mexico campaign, and the full MoCap pipeline for Marinela's virtual character at its live performance at Auditorio Nacional.">Estudio de virtual production propio. Dirección de proyectos de VFX, motion capture y pipelines en tiempo real para cine, TV, publicidad y eventos en vivo — incluyendo comerciales de TV Azteca para el Mundial Qatar y México 2026, la campaña VISA Mundial México, y el pipeline completo de MoCap para el personaje virtual de Marinela en su presentación en vivo en el Auditorio Nacional.</p>
+      </div>
+    </article>
+
+    <article class="timeline__item">
+      <div class="timeline__marker"></div>
+      <div class="timeline__card">
+        <div class="timeline__card-header">
+          <h3>Orionn</h3>
+          <span class="timeline__date"></span>
+        </div>
+        <p class="timeline__role">MoCap Supervisor · VFX Supervisor</p>
+        <p class="timeline__desc i18n" data-en="Supervised motion capture and visual effects depending on the project — multidisciplinary work across different productions.">Supervisión de captura de movimiento y de efectos visuales según el proyecto — participación multidisciplinaria a lo largo de distintas producciones.</p>
+      </div>
+    </article>
+
+    <article class="timeline__item">
+      <div class="timeline__marker"></div>
+      <div class="timeline__card">
+        <div class="timeline__card-header">
+          <h3>3D Lala Studio</h3>
+          <span class="timeline__date"></span>
+        </div>
+        <p class="timeline__role i18n" data-en="Character Rigger">Character Rigger</p>
+        <p class="timeline__desc i18n" data-en="Character rigging for 3D production.">Rigging de personajes para producción 3D.</p>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- COMPETENCIAS -->
+<section class="skills" id="competencias">
+  <p class="section-label i18n" data-en="// 03 — TECHNICAL SKILLS">// 03 — COMPETENCIAS TÉCNICAS</p>
+  <div class="skills__grid">
+
+    <div class="skill-card">
+      <span class="skill-card__index">01</span>
+      <h3>Software</h3>
+      <div class="skill-card__tags">
+        <span class="tag">Maya</span>
+        <span class="tag">Unreal Engine</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <span class="skill-card__index">02</span>
+      <h3>Scripting</h3>
+      <div class="skill-card__tags">
+        <span class="tag">Python</span>
+        <span class="tag">PySide</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <span class="skill-card__index">03</span>
+      <h3 class="i18n" data-en="Motion Capture">Motion Capture</h3>
+      <div class="skill-card__tags">
+        <span class="tag">Rokoko</span>
+        <span class="tag">Vicon</span>
+        <span class="tag">ARKit</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <span class="skill-card__index">04</span>
+      <h3 class="i18n" data-en="Simulation &amp; XR">Simulación &amp; XR</h3>
+      <div class="skill-card__tags">
+        <span class="tag">Chaos Cloth</span>
+        <span class="tag">XR</span>
+        <span class="tag">AR</span>
+        <span class="tag">VR</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EDUCACIÓN -->
+<section class="education">
+  <p class="section-label i18n" data-en="// 04 — EDUCATION">// 04 — EDUCACIÓN</p>
+  <div class="education__grid">
+    <div class="edu-card">
+      <span class="edu-card__tag">MBA</span>
+      <h3 class="i18n" data-en="Master of Business Administration">Maestría en Administración de Negocios</h3>
+    </div>
+    <div class="edu-card">
+      <span class="edu-card__tag">B.Eng.</span>
+      <h3>Interactive Technology &amp; Digital Animation</h3>
+      <p>Universidad del Valle de México</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<footer class="contact" id="contacto">
+  <p class="section-label i18n" data-en="// 05 — CONTACT">// 05 — CONTACTO</p>
+  <h2 class="contact__headline i18n" data-en="Let's build something together?">¿Hacemos algo juntos?</h2>
+
+  <div class="contact__grid">
+    <a href="mailto:spacejoints.79@gmail.com" class="contact-block">
+      <span class="contact-block__label">EMAIL</span>
+      <span class="contact-block__value">spacejoints.79@gmail.com</span>
+    </a>
+    <a href="https://www.linkedin.com/in/antonmr/" target="_blank" rel="noopener" class="contact-block">
+      <span class="contact-block__label">LINKEDIN</span>
+      <span class="contact-block__value">/in/antonmr</span>
+    </a>
+    <a href="tel:" class="contact-block" id="phone-block">
+      <span class="contact-block__label i18n" data-en="PHONE">TELÉFONO</span>
+      <span class="contact-block__value i18n" data-en="Add number">Añadir número</span>
+    </a>
+  </div>
+
+  <div class="contact__footer-bottom">
+    <span>VIZEONIC © 2026</span>
+    <span class="i18n" data-en="Designed and built by Anton Ray">Diseñado y construido por Anton Ray</span>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
