@@ -207,30 +207,45 @@ document.addEventListener('DOMContentLoaded', () => {
       marquee.scrollBy({ left: step, behavior: 'smooth' });
     });
 
-    // Play a short right inside its own card (no popup, no leaving the page)
+    // Play a short right inside its own card (no popup, no leaving the page):
+    // centers it in the strip, scales it up a touch, and dims its neighbors
+    // so it reads as the thing in focus.
     function playInline(card) {
       if (card.classList.contains('is-playing')) return;
       document.querySelectorAll('.shorts__card.is-playing').forEach(stopInline);
 
       const videoId = card.dataset.videoId;
       const iframe = document.createElement('iframe');
-      iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&playsinline=1`;
+      // muted + autoplay: iOS Safari refuses unmuted autoplay even from a
+      // real tap, which made the first tap "open" the player without
+      // actually starting it. Muted autoplay is allowed everywhere, and
+      // the viewer can unmute from the player's own speaker icon.
+      iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&rel=0&playsinline=1`;
       iframe.title = 'Anton Ray — Short';
       iframe.setAttribute('frameborder', '0');
       iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
       iframe.setAttribute('allowfullscreen', '');
       card.appendChild(iframe);
-      card.classList.add('is-playing');
+      card.classList.add('is-playing', 'is-focused');
+      marquee.classList.add('has-active');
 
       clearTimeout(resumeTimer);
       autoPaused = true; // don't scroll a card away while it's playing
+
+      // Center it in the strip once it has its focused (bigger) size.
+      requestAnimationFrame(() => {
+        card.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      });
     }
 
     function stopInline(card) {
       const iframe = card.querySelector('iframe');
       if (iframe) iframe.remove();
-      card.classList.remove('is-playing');
-      autoPaused = false;
+      card.classList.remove('is-playing', 'is-focused');
+      if (!document.querySelector('.shorts__card.is-playing')) {
+        marquee.classList.remove('has-active');
+        autoPaused = false;
+      }
     }
 
     document.querySelectorAll('.shorts__card').forEach((card) => {

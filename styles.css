@@ -513,6 +513,19 @@ section, .contact {
   overflow: hidden;
   padding: 0;
   cursor: pointer;
+  transition: transform 0.35s var(--ease), opacity 0.3s var(--ease), filter 0.3s var(--ease), box-shadow 0.35s var(--ease);
+}
+
+/* Spotlight: when a clip is playing, it grows and its neighbors dim */
+.shorts__marquee.has-active .shorts__card:not(.is-playing) {
+  opacity: 0.32;
+  filter: brightness(0.35) saturate(0.7);
+}
+.shorts__card.is-focused {
+  transform: scale(1.14);
+  z-index: 4;
+  border-color: var(--amber);
+  box-shadow: 0 12px 50px rgba(0,0,0,0.7);
 }
 .shorts__card img {
   width: 100%;
