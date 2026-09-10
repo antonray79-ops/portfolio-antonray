@@ -17,6 +17,26 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
+  // --- Mobile nav (hamburger) ---
+  const navToggle = document.getElementById('hud-nav-toggle');
+  const navLinks = document.getElementById('hud-nav-links');
+
+  function closeMobileNav() {
+    navLinks?.classList.remove('is-open');
+    navToggle?.classList.remove('is-open');
+    navToggle?.setAttribute('aria-expanded', 'false');
+  }
+
+  navToggle?.addEventListener('click', () => {
+    const isOpen = navLinks?.classList.toggle('is-open');
+    navToggle.classList.toggle('is-open', !!isOpen);
+    navToggle.setAttribute('aria-expanded', String(!!isOpen));
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 720) closeMobileNav();
+  });
+
   // --- Scroll-reveal for section labels + timeline items ---
   const revealTargets = document.querySelectorAll('.section-label, .timeline__item');
 
@@ -89,12 +109,16 @@ document.addEventListener('DOMContentLoaded', () => {
   if (savedLang === 'en') setLanguage('en');
 
   // --- Reels dropdown: jump to a specific tab from the nav ---
+  // "Rigging" links straight to the demo reel section (it's a plain #reel
+  // link with no data-tab), so it falls through to the generic smooth-scroll
+  // handler below instead of being caught here.
   document.querySelectorAll('.nav-dropdown__menu a[data-tab]').forEach((link) => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
       activateTab(link.dataset.tab);
       const target = document.querySelector('#reels');
       if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      closeMobileNav();
     });
   });
 
@@ -110,6 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let wasDragging = false;
     let startX = 0;
     let startScroll = 0;
+    let isPlayerOpen = false;
 
     function half() {
       return track.scrollWidth / 2;
@@ -125,7 +150,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function pauseAutoTemporarily() {
       autoPaused = true;
       clearTimeout(resumeTimer);
-      resumeTimer = setTimeout(() => { autoPaused = false; }, 2200);
+      // Never auto-resume while the featured player is open — the strip
+      // stays fully stopped until the viewer closes the video.
+      resumeTimer = setTimeout(() => { if (!isPlayerOpen) autoPaused = false; }, 2200);
     }
 
     // Auto-scroll loop
@@ -136,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (lastTs === null) lastTs = ts;
         const dt = (ts - lastTs) / 1000;
         lastTs = ts;
-        if (!autoPaused && !isPointerDown) {
+        if (!autoPaused && !isPointerDown && !isPlayerOpen) {
           marquee.scrollLeft += pxPerSecond * dt;
           wrapScroll();
         }
@@ -147,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     marquee.addEventListener('mouseenter', () => { autoPaused = true; });
     marquee.addEventListener('mouseleave', () => {
-      if (!isPointerDown) autoPaused = false;
+      if (!isPointerDown && !isPlayerOpen) autoPaused = false;
     });
     marquee.addEventListener('wheel', pauseAutoTemporarily, { passive: true });
     marquee.addEventListener('scroll', wrapScroll, { passive: true });
@@ -239,6 +266,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       clearTimeout(resumeTimer);
       autoPaused = true;
+      isPlayerOpen = true;
 
       shortsPlayer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
@@ -248,6 +276,7 @@ document.addEventListener('DOMContentLoaded', () => {
       shortsPlayer?.classList.remove('is-open');
       if (activeCard) activeCard.classList.remove('is-active');
       activeCard = null;
+      isPlayerOpen = false;
       autoPaused = false;
     }
 
@@ -268,7 +297,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- Smooth-scroll for in-page nav links ---
   document.querySelectorAll('a[href^="#"]').forEach((link) => {
-    if (link.closest('.nav-dropdown__menu')) return; // handled above
+    if (link.closest('.nav-dropdown__menu') && link.dataset.tab) return; // handled above
     link.addEventListener('click', (e) => {
       const targetId = link.getAttribute('href');
       const target = document.querySelector(targetId);
@@ -276,6 +305,7 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
+      closeMobileNav();
     });
   });
 

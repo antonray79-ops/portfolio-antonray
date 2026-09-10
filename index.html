@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Anton Ray — Creative Producer · VFX Supervisor · Rigging TD</title>
-<meta name="description" content="Anton Ray (Vizeonic) — Creative Producer, VFX Supervisor y Rigging TD en Ciudad de México. Honda, TV Azteca, VISA, Marinela, L'Oréal, Telcel, Volaris.">
+<meta name="description" content="Anton Ray (Space Joints) — Creative Producer, VFX Supervisor y Rigging TD en Ciudad de México. Honda, TV Azteca, VISA, Marinela, L'Oréal, Telcel, Volaris.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -15,12 +15,15 @@
 <div class="grain-overlay"></div>
 
 <nav class="hud-nav">
-  <div class="hud-nav__brand">ANTON RAY</div>
-  <div class="hud-nav__links">
+  <a href="#hero" class="hud-nav__brand">
+    <img src="assets/logo-spacejoints.png" alt="Space Joints" class="hud-nav__logo">
+    <span>ANTON RAY</span>
+  </a>
+  <div class="hud-nav__links" id="hud-nav-links">
     <div class="nav-dropdown">
       <a href="#reels" class="nav-dropdown__trigger i18n" data-en="Reels">Reels <span class="nav-dropdown__caret">▾</span></a>
       <div class="nav-dropdown__menu">
-        <a href="#reels" data-tab="rigging">Rigging</a>
+        <a href="#reel" class="i18n" data-en="Rigging">Rigging</a>
         <a href="#reels" data-tab="scripting">Scripting</a>
         <a href="#reels" data-tab="mocap" class="i18n" data-en="Motion Capture">Motion Capture</a>
         <a href="#reels" data-tab="gumroad">Gumroad</a>
@@ -38,6 +41,9 @@
       <button type="button" class="lang-btn" data-lang="en">EN</button>
     </div>
     <div class="rec-indicator"><span class="rec-dot"></span>REC</div>
+    <button class="hud-nav__toggle" type="button" id="hud-nav-toggle" aria-label="Menú" aria-expanded="false" aria-controls="hud-nav-links">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
 
@@ -49,7 +55,7 @@
   <div class="hero__corner hero__corner--br"></div>
 
   <div class="hero__content">
-    <p class="hero__eyebrow">VIZEONIC · CIUDAD DE MÉXICO</p>
+    <p class="hero__eyebrow">SPACE JOINTS · CIUDAD DE MÉXICO</p>
     <h1 class="hero__name">ANTON RAY</h1>
     <p class="hero__alias">Antonio Mexicano</p>
     <h2 class="hero__title">Creative Producer <span class="hero__dot">·</span> VFX Supervisor <span class="hero__dot">·</span> Rigging TD</h2>
@@ -125,7 +131,7 @@
     </div>
     <div class="reel__hud reel__hud--bottom">
       <span>00:00 / 01:32</span>
-      <span>VIZEONIC © 2026</span>
+      <span>SPACE JOINTS © 2026</span>
     </div>
   </div>
 </section>
@@ -257,7 +263,7 @@
       <div class="timeline__marker"></div>
       <div class="timeline__card">
         <div class="timeline__card-header">
-          <h3>Vizeonic</h3>
+          <h3>Space Joints</h3>
           <span class="timeline__date i18n" data-en="2016 — Present">2016 — Presente</span>
         </div>
         <p class="timeline__role">Founder · VFX Supervisor</p>
@@ -376,7 +382,7 @@
   </div>
 
   <div class="contact__footer-bottom">
-    <span>VIZEONIC © 2026</span>
+    <span>SPACE JOINTS © 2026</span>
     <span class="i18n" data-en="Designed and built by Anton Ray">Diseñado y construido por Anton Ray</span>
   </div>
 </footer>

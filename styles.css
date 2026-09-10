@@ -94,15 +94,49 @@ a { color: inherit; text-decoration: none; }
   border-bottom-color: var(--panel-line);
 }
 .hud-nav__brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   font-family: var(--font-display);
   font-size: 18px;
   letter-spacing: 0.08em;
+  transition: opacity 0.25s var(--ease);
+}
+.hud-nav__brand:hover { opacity: 0.8; }
+.hud-nav__logo {
+  height: 26px;
+  width: auto;
+  display: block;
 }
 .hud-nav__right {
   display: flex;
   align-items: center;
   gap: 20px;
 }
+
+/* Mobile menu toggle (hamburger) */
+.hud-nav__toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+.hud-nav__toggle span {
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: var(--text-dim);
+  transition: transform 0.25s var(--ease), opacity 0.25s var(--ease);
+}
+.hud-nav__toggle.is-open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.hud-nav__toggle.is-open span:nth-child(2) { opacity: 0; }
+.hud-nav__toggle.is-open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 .hud-nav__links { display: flex; align-items: center; gap: 32px; }
 .hud-nav__links > a {
   color: var(--text-dim);
@@ -195,11 +229,48 @@ a { color: inherit; text-decoration: none; }
 .lang-btn.is-active { color: var(--amber); }
 
 @media (max-width: 720px) {
-  .hud-nav { padding: 18px 20px; }
-}
+  .hud-nav { padding: 16px 20px; }
 
-@media (max-width: 720px) {
-  .hud-nav__links { display: none; }
+  .hud-nav__toggle { display: flex; }
+
+  .hud-nav__links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    background: rgba(6,6,7,0.97);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--panel-line);
+    padding: 4px 20px 16px;
+  }
+  .hud-nav__links.is-open { display: flex; }
+  .hud-nav__links > a {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--panel-line);
+  }
+  .hud-nav__links > a::after { display: none; }
+
+  .nav-dropdown { border-bottom: 1px solid var(--panel-line); }
+  .nav-dropdown__trigger {
+    justify-content: space-between;
+    padding: 14px 0;
+  }
+  .nav-dropdown__menu {
+    position: static;
+    display: block;
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+    background: transparent;
+    border: none;
+    backdrop-filter: none;
+    padding: 0 0 10px 12px;
+  }
+  .nav-dropdown__menu a { padding: 10px 0; }
 }
 
 /* ---------- Hero ---------- */
