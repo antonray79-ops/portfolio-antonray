@@ -73,13 +73,26 @@ document.addEventListener('DOMContentLoaded', () => {
   if (gumroadGrid && hasProducts && Array.isArray(PRODUCTS.gumroad)) {
     const escapeAttr = (str) => String(str || '').replace(/"/g, '&quot;');
 
-    gumroadGrid.innerHTML = PRODUCTS.gumroad.map((p) => `
-      <div class="work-card">
-        <div class="work-card__thumb">GR</div>
-        <h3>${p.title}</h3>
-        <p class="i18n" data-en="${escapeAttr(p.descEn)}">${p.desc || ''}</p>
-        ${p.url ? `<a class="gumroad-button work-card__buy" href="${p.url}" target="_blank" rel="noopener">Comprar en Gumroad ↗</a>` : ''}
-      </div>`).join('');
+    gumroadGrid.innerHTML = PRODUCTS.gumroad.map((p) => {
+      // Con id + url puestos, mostramos la vista previa real de Gumroad
+      // (miniatura, precio, botón "I want this!") en vez de una tarjeta
+      // hecha a mano — gumroad-embed.js la arma sola al cargar la página.
+      if (p.id && p.url) {
+        return `
+          <div class="gumroad-embed-wrap">
+            <div class="gumroad-product-embed" data-gumroad-product-id="${p.id}">
+              <a href="${p.url}">Loading...</a>
+            </div>
+          </div>`;
+      }
+      // Sin id/url todavía: tarjeta de texto simple como respaldo.
+      return `
+        <div class="work-card">
+          <div class="work-card__thumb">GR</div>
+          <h3>${p.title}</h3>
+          <p class="i18n" data-en="${escapeAttr(p.descEn)}">${p.desc || ''}</p>
+        </div>`;
+    }).join('');
   }
 
   // --- Mobile nav (hamburger) ---
