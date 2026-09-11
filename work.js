@@ -21,30 +21,30 @@
 const WORK = {
 
   rigging: [
-    {
-      thumb: "RIG",
-      title: "Cascade Rig System",
-      desc: "Sistema de rig modular con jerarquía orient → sdk → grp → ctrl, pensado para producción rápida sin sacrificar control de animador.",
-      descEn: "Modular rig system with an orient → sdk → grp → ctrl hierarchy, built for fast production without giving up animator control."
-    },
-    {
-      thumb: "RIG",
-      title: "ikStretchyLeg",
-      desc: "Pierna IK con stretch y (próximamente) Foot Reversal y Soft IK integrados.",
-      descEn: "Stretchy IK leg with Foot Reversal and Soft IK coming soon."
-    },
-    {
-      thumb: "RIG",
-      title: "Rail Spine",
-      desc: "Columna basada en rieles para deformación fluida en personajes hero.",
-      descEn: "Rail-based spine for fluid deformation on hero characters."
-    },
-    {
-      thumb: "RIG",
-      title: "TLALOC (UE 5.8)",
-      desc: "Deidad mesoamericana hero character con simulación Chaos Cloth en cinturón (15+ tiras) y penacho de plumas.",
-      descEn: "Mesoamerican deity hero character with Chaos Cloth simulation on the belt (15+ hanging strips) and feather headpiece."
-    }
+    // {
+    //   thumb: "RIG",
+    //   title: "Cascade Rig System",
+    //   desc: "Sistema de rig modular con jerarquía orient → sdk → grp → ctrl, pensado para producción rápida sin sacrificar control de animador.",
+    //   descEn: "Modular rig system with an orient → sdk → grp → ctrl hierarchy, built for fast production without giving up animator control."
+    // },
+    // {
+    //   thumb: "RIG",
+    //   title: "ikStretchyLeg",
+    //   desc: "Pierna IK con stretch y (próximamente) Foot Reversal y Soft IK integrados.",
+    //   descEn: "Stretchy IK leg with Foot Reversal and Soft IK coming soon."
+    // },
+    // {
+    //   thumb: "RIG",
+    //   title: "Rail Spine",
+    //   desc: "Columna basada en rieles para deformación fluida en personajes hero.",
+    //   descEn: "Rail-based spine for fluid deformation on hero characters."
+    // },
+    // {
+    //   thumb: "RIG",
+    //   title: "TLALOC (UE 5.8)",
+    //   desc: "Deidad mesoamericana hero character con simulación Chaos Cloth en cinturón (15+ tiras) y penacho de plumas.",
+    //   descEn: "Mesoamerican deity hero character with Chaos Cloth simulation on the belt (15+ hanging strips) and feather headpiece."
+    // }
   ],
 
   // Vacío a propósito: esta pestaña ahora solo muestra videos de
