@@ -73,24 +73,24 @@ const WORK = {
   scripting: [],
 
   mocap: [
-    {
-      thumb: "MC",
-      title: "FaceClean",
-      desc: "App standalone de limpieza y retargeting de captura facial — pipeline video → MediaPipe → ARKit CSV.",
-      descEn: "Standalone facial mocap cleanup and retargeting app — video → MediaPipe → ARKit CSV pipeline."
-    },
-    {
-      thumb: "MC",
-      title: "Pipeline Rokoko + Vicon",
-      desc: "Captura full-body con Rokoko Smartsuit Pro y Smartgloves, más laboratorio Vicon para proyectos de alta precisión.",
-      descEn: "Full-body capture with Rokoko Smartsuit Pro and Smartgloves, plus a Vicon lab for high-precision projects."
-    },
-    {
-      thumb: "MC",
-      title: "Marinela — Auditorio Nacional",
-      desc: "Pipeline completo de MoCap para personaje virtual en presentación en vivo.",
-      descEn: "Full MoCap pipeline for a virtual character in a live performance."
-    }
+    // {
+    //   thumb: "MC",
+    //   title: "FaceClean",
+    //   desc: "App standalone de limpieza y retargeting de captura facial — pipeline video → MediaPipe → ARKit CSV.",
+    //   descEn: "Standalone facial mocap cleanup and retargeting app — video → MediaPipe → ARKit CSV pipeline."
+    // },
+    // {
+    //   thumb: "MC",
+    //   title: "Pipeline Rokoko + Vicon",
+    //   desc: "Captura full-body con Rokoko Smartsuit Pro y Smartgloves, más laboratorio Vicon para proyectos de alta precisión.",
+    //   descEn: "Full-body capture with Rokoko Smartsuit Pro and Smartgloves, plus a Vicon lab for high-precision projects."
+    // },
+    // {
+    //   thumb: "MC",
+    //   title: "Marinela — Auditorio Nacional",
+    //   desc: "Pipeline completo de MoCap para personaje virtual en presentación en vivo.",
+    //   descEn: "Full MoCap pipeline for a virtual character in a live performance."
+    // }
   ]
 
 };
