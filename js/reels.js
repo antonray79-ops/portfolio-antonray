@@ -1,94 +1,85 @@
 // ============================================================
-// REELS — mini-reel por pestaña (videos.js), tarjetas de trabajo
-// (work.js) y tarjetas de breakdown (videos.js -> VIDEOS.breakdowns)
-// dentro de cada pestaña (Rigging / Scripting / Motion Capture)
+// REELS — demo de cada pestaña (contenido/videos.js), tarjetas de
+// texto (contenido/trabajos.js) y tarjetas de breakdown
+// (contenido/videos.js -> VIDEOS.breakdowns)
 // ============================================================
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  // ---- Mini-reel opcional por pestaña ----
-  if (hasVideos && VIDEOS.reels) {
-    Object.keys(VIDEOS.reels).forEach((tabName) => {
-      const videoId = VIDEOS.reels[tabName];
-      const container = document.getElementById(`reel-${tabName}`);
-      if (!videoId || !container) return;
+  // ---- Demo de arriba, por pestaña ----
+  if (hayVideos && VIDEOS.reels) {
+    Object.keys(VIDEOS.reels).forEach((pestana) => {
+      const videoId = VIDEOS.reels[pestana];
+      const contenedor = document.getElementById(`reel-${pestana}`);
+      if (!videoId || !contenedor) return;
 
       const iframe = document.createElement('iframe');
       iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0`;
-      iframe.title = `Anton Ray — ${tabName}`;
+      iframe.title = `Anton Ray — ${pestana}`;
       iframe.setAttribute('frameborder', '0');
       iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
       iframe.setAttribute('allowfullscreen', '');
-      container.appendChild(iframe);
+      contenedor.appendChild(iframe);
     });
   }
 
-  // ---- Tarjetas de trabajo (work.js -> WORK) ----
-  // "Cascade Rig System", "myTools Compendium", "FaceClean", etc. — el
-  // contenido de cada pestaña vive en work.js; aquí solo se arma el HTML.
-  if (hasWork) {
-    Object.keys(WORK).forEach((tabName) => {
-      const grid = document.querySelector(`#panel-${tabName} .work-grid`);
-      const items = WORK[tabName] || [];
+  // ---- Tarjetas de texto (contenido/trabajos.js) ----
+  if (hayTrabajos) {
+    Object.keys(TRABAJOS).forEach((pestana) => {
+      const grid = document.querySelector(`#panel-${pestana} .work-grid`);
+      const items = TRABAJOS[pestana] || [];
       if (!grid) return;
 
-      grid.innerHTML = items.map((item) => {
-        const titleHTML = item.titleEn
-          ? `<h3 class="i18n" data-en="${escapeAttr(item.titleEn)}">${escapeHTML(item.title)}</h3>`
-          : `<h3>${escapeHTML(item.title || '')}</h3>`;
-        return `
-          <div class="work-card">
-            <div class="work-card__thumb">${escapeHTML(item.thumb || '')}</div>
-            ${titleHTML}
-            <p class="i18n" data-en="${escapeAttr(item.descEn || '')}">${item.desc || ''}</p>
-          </div>`;
-      }).join('');
+      grid.innerHTML = items.map((item) => `
+        <div class="work-card">
+          <div class="work-card__thumb">${escapeHTML(item.sigla || '')}</div>
+          <h3 ${attrsIdioma(item.titulo)}>${escapeHTML(textoES(item.titulo))}</h3>
+          <p ${attrsIdioma(item.desc)}>${escapeHTML(textoES(item.desc))}</p>
+        </div>`).join('');
     });
   }
 
-  // ---- Breakdowns (videos.js -> VIDEOS.breakdowns) ----
-  // Se agregan como tarjetas dentro de la MISMA cuadrícula que "Cascade
-  // Rig System" etc. (con miniatura en vez de descripción). Al hacerles
-  // clic, el video se reproduce ARRIBA, en el mini-reel principal de esa
-  // pestaña — nunca en ventana aparte, y el demo principal sigue siendo
-  // lo primero que se ve al entrar a la pestaña.
-  if (hasVideos && VIDEOS.breakdowns) {
-    Object.keys(VIDEOS.breakdowns).forEach((tabName) => {
-      const items = (VIDEOS.breakdowns[tabName] || []).filter((b) => b && b.id);
-      const grid = document.querySelector(`#panel-${tabName} .work-grid`);
-      const miniReel = document.getElementById(`reel-${tabName}`);
+  // ---- Breakdowns (contenido/videos.js) ----
+  // Se agregan como tarjetas en la MISMA cuadrícula que las de texto,
+  // pero con miniatura. Al darles clic el video se reproduce ARRIBA,
+  // en el demo de esa pestaña — nunca en ventana aparte.
+  if (hayVideos && VIDEOS.breakdowns) {
+    Object.keys(VIDEOS.breakdowns).forEach((pestana) => {
+      const items = (VIDEOS.breakdowns[pestana] || []).filter((b) => b && b.id);
+      const grid = document.querySelector(`#panel-${pestana} .work-grid`);
+      const demo = document.getElementById(`reel-${pestana}`);
       if (!grid || items.length === 0) return;
 
       items.forEach((item, i) => {
-        const label = item.title || `Breakdown ${i + 1}`;
-        const card = document.createElement('button');
-        card.type = 'button';
-        card.className = 'work-card work-card--video';
-        card.dataset.videoId = item.id;
-        card.innerHTML = `
+        const titulo = item.titulo || item.title || `Breakdown ${i + 1}`;
+        const tarjeta = document.createElement('button');
+        tarjeta.type = 'button';
+        tarjeta.className = 'work-card work-card--video';
+        tarjeta.dataset.videoId = item.id;
+        tarjeta.innerHTML = `
           <div class="work-card__video-thumb">
-            <img src="https://img.youtube.com/vi/${item.id}/hqdefault.jpg" alt="${escapeAttr(label)}" loading="lazy">
+            <img src="https://img.youtube.com/vi/${item.id}/hqdefault.jpg" alt="${escapeAttr(textoES(titulo))}" loading="lazy">
             <span class="work-card__play">▶</span>
           </div>
-          <h3>${escapeAttr(label)}</h3>`;
+          <h3 ${attrsIdioma(titulo)}>${escapeHTML(textoES(titulo))}</h3>`;
 
-        card.addEventListener('click', () => {
-          if (!miniReel) return;
-          miniReel.innerHTML = '';
+        tarjeta.addEventListener('click', () => {
+          if (!demo) return;
+          demo.innerHTML = '';
           const iframe = document.createElement('iframe');
           iframe.src = `https://www.youtube.com/embed/${item.id}?autoplay=1&mute=1&rel=0&playsinline=1`;
-          iframe.title = `Anton Ray — ${label}`;
+          iframe.title = `Anton Ray — ${textoES(titulo)}`;
           iframe.setAttribute('frameborder', '0');
           iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
           iframe.setAttribute('allowfullscreen', '');
-          miniReel.appendChild(iframe);
+          demo.appendChild(iframe);
 
           grid.querySelectorAll('.work-card--video').forEach((c) => c.classList.remove('is-active'));
-          card.classList.add('is-active');
-          miniReel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          tarjeta.classList.add('is-active');
+          demo.scrollIntoView({ behavior: 'smooth', block: 'center' });
         });
 
-        grid.appendChild(card);
+        grid.appendChild(tarjeta);
       });
     });
   }

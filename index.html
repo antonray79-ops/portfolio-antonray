@@ -3,11 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ============================================================
+     LO ÚNICO EDITABLE DE ESTE ARCHIVO: el título de la pestaña del
+     navegador y la descripción que sale en Google. Todo lo demás
+     del sitio (textos, videos, clientes, productos, experiencia)
+     se edita en la carpeta contenido/ — ver contenido/LEEME.md.
+     ============================================================ -->
 <title>Anton Ray — Creative Producer · VFX Supervisor · Rigging TD</title>
 <meta name="description" content="Anton Ray (Space Joints) — Creative Producer, VFX Supervisor y Rigging TD en Ciudad de México. Honda, TV Azteca, VISA, Marinela, L'Oréal, Telcel, Volaris.">
+
+<!-- Ícono de la pestaña del navegador -->
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180.png">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
 <!-- Los estilos están separados por sección en css/ — ver css/base.css
      para variables de color, tipografía, etc. -->
 <link rel="stylesheet" href="css/base.css">
@@ -34,18 +47,18 @@
   </a>
   <div class="hud-nav__links" id="hud-nav-links">
     <div class="nav-dropdown">
-      <a href="#reels" class="nav-dropdown__trigger i18n" data-i18n="nav_reels">Reels <span class="nav-dropdown__caret">▾</span></a>
+      <a href="#reels" class="nav-dropdown__trigger"><span data-txt="nav_reels"></span> <span class="nav-dropdown__caret">▾</span></a>
       <div class="nav-dropdown__menu">
-        <a href="#reel" class="i18n open-reel-modal" data-i18n="nav_rigging">Rigging</a>
-        <a href="#reels" data-tab="scripting">Scripting</a>
-        <a href="#reels" data-tab="mocap" class="i18n" data-i18n="nav_mocap">Motion Capture</a>
+        <a href="#reel" class="open-reel-modal" data-txt="nav_rigging"></a>
+        <a href="#reels" data-tab="scripting" data-txt="nav_scripting"></a>
+        <a href="#reels" data-tab="mocap" data-txt="nav_mocap"></a>
       </div>
     </div>
-    <a href="#store" class="i18n" data-i18n="nav_store">Tienda</a>
-    <a href="#clientes" class="i18n" data-i18n="nav_clients">Clientes</a>
-    <a href="#experiencia" class="i18n" data-i18n="nav_experience">Experiencia</a>
-    <a href="#competencias" class="i18n" data-i18n="nav_skills">Competencias</a>
-    <a href="#contacto" class="i18n" data-i18n="nav_contact">Contacto</a>
+    <a href="#store" data-txt="nav_store"></a>
+    <a href="#clientes" data-txt="nav_clients"></a>
+    <a href="#experiencia" data-txt="nav_experience"></a>
+    <a href="#competencias" data-txt="nav_skills"></a>
+    <a href="#contacto" data-txt="nav_contact"></a>
   </div>
   <div class="hud-nav__right">
     <div class="lang-toggle" role="group" aria-label="Idioma / Language">
@@ -68,31 +81,31 @@
   <div class="hero__corner hero__corner--br"></div>
 
   <div class="hero__content">
-    <p class="hero__eyebrow">SPACE JOINTS · CIUDAD DE MÉXICO</p>
-    <h1 class="hero__name">ANTON RAY</h1>
-    <p class="hero__alias">Antonio Mexicano</p>
-    <h2 class="hero__title">Creative Producer <span class="hero__dot">·</span> VFX Supervisor <span class="hero__dot">·</span> Rigging TD</h2>
-    <p class="hero__tagline i18n" data-i18n="hero_tagline">10+ años dando vida a personajes en cine, TV, videojuegos y virtual production — de la primera junta al render final.</p>
+    <p class="hero__eyebrow" data-txt="hero_eyebrow"></p>
+    <h1 class="hero__name" data-txt="hero_nombre"></h1>
+    <p class="hero__alias" data-txt="hero_alias"></p>
+    <h2 class="hero__title" data-txt="hero_puesto" data-puntos></h2>
+    <p class="hero__tagline" data-txt="hero_tagline"></p>
     <a href="#reel" class="btn btn--primary open-reel-modal">
-      <span class="btn__icon">▶</span> <span class="i18n" data-i18n="hero_watch_reel">Ver Reel</span>
+      <span class="btn__icon">▶</span> <span data-txt="hero_boton_reel"></span>
     </a>
 
     <div class="hero__quicklinks">
-      <a href="#reels" data-tab="rigging" class="hero__quicklink">Rigging</a>
-      <a href="#reels" data-tab="scripting" class="hero__quicklink">Scripting</a>
-      <a href="#reels" data-tab="mocap" class="hero__quicklink i18n" data-i18n="hero_quicklink_mocap">Motion Capture</a>
+      <a href="#reels" data-tab="rigging" class="hero__quicklink" data-txt="hero_quick_rigging"></a>
+      <a href="#reels" data-tab="scripting" class="hero__quicklink" data-txt="hero_quick_script"></a>
+      <a href="#reels" data-tab="mocap" class="hero__quicklink" data-txt="hero_quick_mocap"></a>
     </div>
   </div>
 
   <div class="hero__scroll">
-    <span>SCROLL</span>
+    <span data-txt="hero_scroll"></span>
     <div class="hero__scroll-line"></div>
   </div>
 </header>
 
-<!-- SHORTS -->
+<!-- CLIPS (SHORTS) — las tarjetas salen de contenido/videos.js -->
 <section class="shorts">
-  <p class="section-label">// CLIPS</p>
+  <p class="section-label" data-txt="label_clips"></p>
 
   <div class="shorts__player" id="shorts-player">
     <div class="shorts__player-frame"></div>
@@ -101,76 +114,58 @@
 
   <div class="shorts__wrap">
     <button class="shorts__nav shorts__nav--prev" type="button" aria-label="Anteriores">‹</button>
-
     <div class="shorts__marquee">
-      <!-- Las tarjetas se generan automáticamente desde videos.js -->
       <div class="shorts__track" id="shorts-track"></div>
     </div>
-
     <button class="shorts__nav shorts__nav--next" type="button" aria-label="Siguientes">›</button>
   </div>
 
-  <a href="https://www.youtube.com/@AntonRaySJ" target="_blank" rel="noopener" class="shorts__more i18n" data-i18n="shorts_more">Más clips en YouTube ↗</a>
+  <a href="#" target="_blank" rel="noopener" class="shorts__more" id="liga-youtube" data-txt="shorts_more"></a>
 </section>
 
-<!-- REELS (TABS) -->
+<!-- REELS — demos y breakdowns salen de contenido/videos.js,
+     las tarjetas de texto de contenido/trabajos.js -->
 <section class="work" id="reels">
-  <p class="section-label">// REELS</p>
+  <p class="section-label" data-txt="label_reels"></p>
 
   <div class="tabs" role="tablist">
-    <button class="tab-btn is-active" role="tab" aria-selected="true" data-tab="rigging">Rigging</button>
-    <button class="tab-btn" role="tab" aria-selected="false" data-tab="scripting">Scripting</button>
-    <button class="tab-btn i18n" role="tab" aria-selected="false" data-tab="mocap" data-i18n="tabs_mocap">Motion Capture</button>
+    <button class="tab-btn is-active" role="tab" aria-selected="true" data-tab="rigging" data-txt="tab_rigging"></button>
+    <button class="tab-btn" role="tab" aria-selected="false" data-tab="scripting" data-txt="tab_scripting"></button>
+    <button class="tab-btn" role="tab" aria-selected="false" data-tab="mocap" data-txt="tab_mocap"></button>
   </div>
 
   <div class="tab-panels">
-
     <div class="tab-panel is-active" id="panel-rigging" role="tabpanel">
       <div class="mini-reel" id="reel-rigging"></div>
-      <!-- Las tarjetas se generan automáticamente desde work.js -->
       <div class="work-grid"></div>
     </div>
-
     <div class="tab-panel" id="panel-scripting" role="tabpanel" hidden>
       <div class="mini-reel" id="reel-scripting"></div>
-      <!-- Las tarjetas se generan automáticamente desde work.js -->
       <div class="work-grid"></div>
     </div>
-
     <div class="tab-panel" id="panel-mocap" role="tabpanel" hidden>
       <div class="mini-reel" id="reel-mocap"></div>
-      <!-- Las tarjetas se generan automáticamente desde work.js -->
       <div class="work-grid"></div>
     </div>
-
   </div>
 </section>
 
-<!-- TIENDA -->
-<!-- Sección propia (no una pestaña de Reels) para que quepa cualquier
-     tienda — Gumroad hoy, ArtStation o la que sea después. Cada tienda
-     es un bloque de products.js; agregar una nueva es duplicar este
-     bloque y darle su propio contenedor/ids. -->
+<!-- TIENDA — los productos salen de contenido/tienda.js -->
 <section class="store" id="store">
-  <p class="section-label">// STORE</p>
+  <p class="section-label" data-txt="label_store"></p>
 
-  <!-- Tira horizontal (como los shorts) — las tarjetas se generan
-       automáticamente desde products.js -->
   <div class="gumroad-strip">
     <button class="shorts__nav gumroad-nav--prev" type="button" aria-label="Anteriores" id="gumroad-nav-prev">‹</button>
     <div class="gumroad-track" id="gumroad-grid"></div>
     <button class="shorts__nav gumroad-nav--next" type="button" aria-label="Siguientes" id="gumroad-nav-next">›</button>
   </div>
-  <a href="https://rayant4.gumroad.com" target="_blank" rel="noopener" class="btn btn--outline i18n" data-i18n="store_gumroad_link">Ver tienda en Gumroad ↗</a>
+  <a href="#" target="_blank" rel="noopener" class="btn btn--outline" id="liga-tienda" data-txt="store_link"></a>
 </section>
 
-<!-- CLIENTES -->
+<!-- CLIENTES — videos y marcas salen de contenido/clientes.js -->
 <section class="clients" id="clientes">
-  <p class="section-label i18n" data-i18n="label_clients">// MARCAS CON LAS QUE HE TRABAJADO</p>
+  <p class="section-label" data-txt="label_clients"></p>
 
-  <!-- Tira de videos por marca (spots horizontales + shorts verticales) —
-       se arma sola desde videos.js -> VIDEOS.clientes. Para agregar un
-       video nuevo solo edita esa lista, no hace falta tocar este HTML. -->
   <div class="clients__player" id="clients-player">
     <div class="clients__player-frame"></div>
     <button class="clients__player-close" id="clients-player-close" type="button" aria-label="Cerrar">✕</button>
@@ -184,154 +179,41 @@
     <button class="shorts__nav clients__nav--next" type="button" aria-label="Siguientes">›</button>
   </div>
 
-  <div class="clients__grid">
-    <div class="client-chip">Honda México</div>
-    <div class="client-chip">TV Azteca</div>
-    <div class="client-chip">Marinela · Grupo Bimbo</div>
-    <div class="client-chip">VISA</div>
-    <div class="client-chip">Garnier</div>
-    <div class="client-chip">CeraVe</div>
-    <div class="client-chip">Maybelline</div>
-    <div class="client-chip">Telcel</div>
-    <div class="client-chip">Volaris</div>
-  </div>
+  <div class="clients__grid"></div>
 </section>
 
-<!-- EXPERIENCIA -->
+<!-- EXPERIENCIA — sale de contenido/experiencia.js -->
 <section class="experience" id="experiencia">
-  <p class="section-label i18n" data-i18n="label_experience">// 01 — EXPERIENCIA PROFESIONAL</p>
-  <div class="timeline">
-
-    <article class="timeline__item">
-      <div class="timeline__marker"></div>
-      <div class="timeline__card">
-        <div class="timeline__card-header">
-          <h3>Space Joints</h3>
-          <span class="timeline__date i18n" data-i18n="exp_spacejoints_date">2016 — Presente</span>
-        </div>
-        <p class="timeline__role">Founder · VFX Supervisor</p>
-        <p class="timeline__desc i18n" data-i18n="exp_spacejoints_desc">Estudio de virtual production propio. Dirección de proyectos de VFX, motion capture y pipelines en tiempo real para cine, TV, publicidad y eventos en vivo — incluyendo comerciales de TV Azteca para el Mundial Qatar y México 2026, la campaña VISA Mundial México, y el pipeline completo de MoCap para el personaje virtual de Marinela en su presentación en vivo en el Auditorio Nacional.</p>
-      </div>
-    </article>
-
-    <article class="timeline__item">
-      <div class="timeline__marker"></div>
-      <div class="timeline__card">
-        <div class="timeline__card-header">
-          <h3>Orionn</h3>
-          <span class="timeline__date"></span>
-        </div>
-        <p class="timeline__role">MoCap Supervisor · VFX Supervisor</p>
-        <p class="timeline__desc i18n" data-i18n="exp_orionn_desc">Supervisión de captura de movimiento y de efectos visuales según el proyecto — participación multidisciplinaria a lo largo de distintas producciones.</p>
-      </div>
-    </article>
-
-    <article class="timeline__item">
-      <div class="timeline__marker"></div>
-      <div class="timeline__card">
-        <div class="timeline__card-header">
-          <h3>3D Lala Studio</h3>
-          <span class="timeline__date"></span>
-        </div>
-        <p class="timeline__role i18n" data-i18n="exp_lala_role">Character Rigger</p>
-        <p class="timeline__desc i18n" data-i18n="exp_lala_desc">Rigging de personajes para producción 3D.</p>
-      </div>
-    </article>
-
-  </div>
+  <p class="section-label" data-txt="label_experience"></p>
+  <div class="timeline"></div>
 </section>
 
-<!-- COMPETENCIAS -->
+<!-- COMPETENCIAS — salen de contenido/competencias.js -->
 <section class="skills" id="competencias">
-  <p class="section-label i18n" data-i18n="label_skills">// 02 — COMPETENCIAS TÉCNICAS</p>
-  <div class="skills__grid">
-
-    <div class="skill-card">
-      <span class="skill-card__index">01</span>
-      <h3>Software</h3>
-      <div class="skill-card__tags">
-        <span class="tag">Maya</span>
-        <span class="tag">Unreal Engine</span>
-      </div>
-    </div>
-
-    <div class="skill-card">
-      <span class="skill-card__index">02</span>
-      <h3>Scripting</h3>
-      <div class="skill-card__tags">
-        <span class="tag">Python</span>
-        <span class="tag">PySide</span>
-      </div>
-    </div>
-
-    <div class="skill-card">
-      <span class="skill-card__index">03</span>
-      <h3 class="i18n" data-i18n="skill_mocap">Motion Capture</h3>
-      <div class="skill-card__tags">
-        <span class="tag">Rokoko</span>
-        <span class="tag">Vicon</span>
-        <span class="tag">ARKit</span>
-      </div>
-    </div>
-
-    <div class="skill-card">
-      <span class="skill-card__index">04</span>
-      <h3 class="i18n" data-i18n="skill_sim">Simulación &amp; XR</h3>
-      <div class="skill-card__tags">
-        <span class="tag">Chaos Cloth</span>
-        <span class="tag">XR</span>
-        <span class="tag">AR</span>
-        <span class="tag">VR</span>
-      </div>
-    </div>
-
-  </div>
+  <p class="section-label" data-txt="label_skills"></p>
+  <div class="skills__grid"></div>
 </section>
 
-<!-- EDUCACIÓN -->
+<!-- EDUCACIÓN — sale de contenido/experiencia.js -->
 <section class="education">
-  <p class="section-label i18n" data-i18n="label_education">// 03 — EDUCACIÓN</p>
-  <div class="education__grid">
-    <div class="edu-card">
-      <span class="edu-card__tag">MBA</span>
-      <h3 class="i18n" data-i18n="edu_mba">Maestría en Administración de Negocios</h3>
-    </div>
-    <div class="edu-card">
-      <span class="edu-card__tag">B.Eng.</span>
-      <h3>Interactive Technology &amp; Digital Animation</h3>
-      <p>Universidad del Valle de México</p>
-    </div>
-  </div>
+  <p class="section-label" data-txt="label_education"></p>
+  <div class="education__grid"></div>
 </section>
 
-<!-- CONTACTO -->
+<!-- CONTACTO — sale de contenido/contacto.js -->
 <footer class="contact" id="contacto">
-  <p class="section-label i18n" data-i18n="label_contact">// 04 — CONTACTO</p>
-  <h2 class="contact__headline i18n" data-i18n="contact_headline">¿Hacemos algo juntos?</h2>
+  <p class="section-label" data-txt="label_contact"></p>
+  <h2 class="contact__headline" data-txt="contact_headline"></h2>
 
-  <div class="contact__grid">
-    <a href="mailto:spacejoints.79@gmail.com" class="contact-block">
-      <span class="contact-block__label">EMAIL</span>
-      <span class="contact-block__value">spacejoints.79@gmail.com</span>
-    </a>
-    <a href="https://www.linkedin.com/in/antonmr/" target="_blank" rel="noopener" class="contact-block">
-      <span class="contact-block__label">LINKEDIN</span>
-      <span class="contact-block__value">/in/antonmr</span>
-    </a>
-    <a href="tel:" class="contact-block" id="phone-block">
-      <span class="contact-block__label i18n" data-i18n="contact_phone_label">TELÉFONO</span>
-      <span class="contact-block__value i18n" data-i18n="contact_phone_value">Añadir número</span>
-    </a>
-  </div>
+  <div class="contact__grid"></div>
 
   <div class="contact__footer-bottom">
-    <span>SPACE JOINTS © 2026</span>
-    <span class="i18n" data-i18n="footer_credit">Diseñado y construido por Anton Ray</span>
+    <span data-txt="footer_copyright"></span>
+    <span data-txt="footer_credit"></span>
   </div>
 </footer>
 
-<!-- Reel modal — ventana sobrepuesta para "Ver Reel" (hero) y "Rigging"
-     (menú Reels), en vez de bajar hasta la sección #reel -->
+<!-- Ventana del reel — la abre "Ver Reel" del hero y "Rigging" del menú -->
 <div class="reel-modal" id="reel-modal">
   <div class="reel-modal__backdrop" id="reel-modal-backdrop"></div>
   <div class="reel-modal__frame">
@@ -340,20 +222,28 @@
   </div>
 </div>
 
-<!-- Embed oficial de Gumroad — convierte los <div class="gumroad-product-embed">
-     que agrega js/tienda.js (desde products.js) en la vista previa real del
-     producto: miniatura, precio y botón "I want this!" -->
+<!-- Embed oficial de Gumroad — convierte los bloques que agrega
+     js/tienda.js en la vista previa real del producto -->
 <script src="https://gumroad.com/js/gumroad-embed.js"></script>
 
-<!-- Datos (contenido) — deben ir antes que los scripts de abajo -->
-<script src="i18n.js"></script>
-<script src="videos.js"></script>
-<script src="work.js"></script>
-<script src="products.js"></script>
+<!-- ============================================================
+     CONTENIDO — lo que edita Anton (ver contenido/LEEME.md).
+     Va antes que los scripts de abajo.
+     ============================================================ -->
+<script src="contenido/textos.js"></script>
+<script src="contenido/videos.js"></script>
+<script src="contenido/trabajos.js"></script>
+<script src="contenido/tienda.js"></script>
+<script src="contenido/clientes.js"></script>
+<script src="contenido/experiencia.js"></script>
+<script src="contenido/competencias.js"></script>
+<script src="contenido/contacto.js"></script>
 
-<!-- Comportamiento, separado por sección (ver js/). idioma.js va después
-     de reels.js/shorts.js/tienda.js a propósito: necesita que esas
-     tarjetas ya existan para poder capturar su texto en español. -->
+<!-- ============================================================
+     COMPORTAMIENTO — el armazón del sitio, separado por sección.
+     idioma.js va HASTA EL FINAL a propósito: pinta los textos y
+     necesita que todas las tarjetas ya existan.
+     ============================================================ -->
 <script src="js/core.js"></script>
 <script src="js/nav.js"></script>
 <script src="js/modal.js"></script>
@@ -362,6 +252,9 @@
 <script src="js/shorts.js"></script>
 <script src="js/clientes.js"></script>
 <script src="js/tienda.js"></script>
+<script src="js/experiencia.js"></script>
+<script src="js/competencias.js"></script>
+<script src="js/contacto.js"></script>
 <script src="js/idioma.js"></script>
 <script src="js/scroll-reveal.js"></script>
 <script src="js/smooth-scroll.js"></script>

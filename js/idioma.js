@@ -1,48 +1,56 @@
 // ============================================================
-// IDIOMA (ES / EN) — toggle que lee de i18n.js para el texto
-// estático del sitio, y de data-en inline para las tarjetas
-// (work.js/videos.js/products.js). Va DESPUÉS de reels.js, shorts.js
-// y tienda.js a propósito: necesita que esas tarjetas ya existan en
-// el DOM para poder capturar su texto en español.
+// IDIOMA (ES / EN) — pinta todos los textos del sitio
+// ------------------------------------------------------------
+// Hay dos tipos de texto y esto maneja los dos:
+//   1. data-txt="clave"  -> lo busca en contenido/textos.js
+//   2. data-es / data-en -> lo trae la propia tarjeta (las que
+//      arman reels.js, clientes.js, experiencia.js, etc.)
+//
+// Va HASTA EL FINAL de los scripts a propósito: necesita que
+// todas las tarjetas ya existan para poder pintarlas.
 // ============================================================
+
+let IDIOMA = 'es';
+function idiomaActual() { return IDIOMA; }
+
+// Los " · " se pintan en ámbar (el puesto del hero los usa).
+function conPuntos(texto) {
+  return escapeHTML(texto).replace(/·/g, '<span class="hero__dot">·</span>');
+}
+
+function aplicarIdioma(lang) {
+  IDIOMA = (lang === 'en') ? 'en' : 'es';
+  document.documentElement.lang = IDIOMA;
+
+  // 1. Textos fijos del sitio (contenido/textos.js)
+  document.querySelectorAll('[data-txt]').forEach((el) => {
+    const par = hayTextos ? TEXTOS[el.dataset.txt] : null;
+    if (!par) return;
+    const valor = (IDIOMA === 'en') ? textoEN(par) : textoES(par);
+    if (el.hasAttribute('data-puntos')) el.innerHTML = conPuntos(valor);
+    else el.textContent = valor;
+  });
+
+  // 2. Tarjetas generadas, que ya traen su texto en los dos idiomas
+  document.querySelectorAll('[data-es]').forEach((el) => {
+    el.textContent = (IDIOMA === 'en') ? (el.dataset.en || el.dataset.es) : el.dataset.es;
+  });
+
+  document.querySelectorAll('.lang-btn').forEach((btn) => {
+    btn.classList.toggle('is-active', btn.dataset.lang === IDIOMA);
+  });
+
+  try { localStorage.setItem('antonray-lang', IDIOMA); } catch (e) { /* sin storage, ni modo */ }
+}
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  const i18nEls = document.querySelectorAll('.i18n');
-  const langButtons = document.querySelectorAll('.lang-btn');
-
-  // Capture the original Spanish text once, so we can always switch back.
-  i18nEls.forEach((el) => {
-    if (!el.dataset.es) el.dataset.es = el.innerHTML;
+  document.querySelectorAll('.lang-btn').forEach((btn) => {
+    btn.addEventListener('click', () => aplicarIdioma(btn.dataset.lang));
   });
 
-  // Texto en inglés de un elemento .i18n: si trae data-i18n="key" lo busca
-  // en el diccionario de i18n.js (texto estático del sitio); si trae
-  // data-en="..." directo en el atributo, lo usa tal cual (así es como lo
-  // arman work.js/videos.js/products.js para sus propias tarjetas).
-  function englishFor(el) {
-    const key = el.dataset.i18n;
-    if (key) return hasI18n && I18N[key] !== undefined ? I18N[key] : el.dataset.es;
-    return el.dataset.en !== undefined ? el.dataset.en : el.dataset.es;
-  }
-
-  function setLanguage(lang) {
-    i18nEls.forEach((el) => {
-      el.innerHTML = lang === 'en' ? englishFor(el) : el.dataset.es;
-    });
-    langButtons.forEach((btn) => {
-      btn.classList.toggle('is-active', btn.dataset.lang === lang);
-    });
-    document.documentElement.lang = lang;
-    try { localStorage.setItem('antonray-lang', lang); } catch (e) { /* storage unavailable, ignore */ }
-  }
-
-  langButtons.forEach((btn) => {
-    btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
-  });
-
-  let savedLang = 'es';
-  try { savedLang = localStorage.getItem('antonray-lang') || 'es'; } catch (e) { /* storage unavailable, ignore */ }
-  if (savedLang === 'en') setLanguage('en');
+  let guardado = 'es';
+  try { guardado = localStorage.getItem('antonray-lang') || 'es'; } catch (e) { /* sin storage, ni modo */ }
+  aplicarIdioma(guardado);
 
 });

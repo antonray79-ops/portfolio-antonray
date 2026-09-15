@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function openReelModal(videoId) {
     // Sin id explícito, cae al reel principal — así los links de "Ver Reel"
     // siguen funcionando igual que antes de que esto aceptara un parámetro.
-    const id = videoId || (hasVideos && VIDEOS.reel && VIDEOS.reel.id);
+    const id = videoId || (hayVideos && VIDEOS.reel && VIDEOS.reel.id);
     if (!reelModal || !reelModalVideo || !id) return;
     reelModalVideo.innerHTML = '';
     const iframe = document.createElement('iframe');

@@ -1,22 +1,20 @@
 // ============================================================
-// TIENDA — tarjetas de productos Gumroad (products.js -> PRODUCTS)
+// TIENDA — productos de Gumroad (contenido/tienda.js)
 // ============================================================
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  // Tarjetas de la pestaña Gumroad, con botón "Comprar" real cuando la
-  // liga ya está puesta en products.js
-  const gumroadGrid = document.getElementById('gumroad-grid');
-  if (gumroadGrid && hasProducts && Array.isArray(PRODUCTS.stores?.gumroad)) {
-    gumroadGrid.innerHTML = PRODUCTS.stores.gumroad.map((p) => {
-      // Con id + url puestos, mostramos la vista previa real de Gumroad
-      // (miniatura, precio, botón "I want this!") en vez de una tarjeta
-      // hecha a mano — gumroad-embed.js la arma sola al cargar la página.
+  const tira = document.getElementById('gumroad-grid');
+  if (tira && hayTienda && Array.isArray(TIENDA.gumroad)) {
+    tira.innerHTML = TIENDA.gumroad.map((p) => {
+      // Con id + url puestos se muestra la vista previa real de Gumroad
+      // (miniatura, precio y botón de compra) — gumroad-embed.js la arma
+      // solo al cargar la página.
       if (p.id && p.url) {
         return `
           <div class="gumroad-card gumroad-embed-wrap">
-            <div class="gumroad-product-embed" data-gumroad-product-id="${p.id}">
-              <a href="${p.url}">Loading...</a>
+            <div class="gumroad-product-embed" data-gumroad-product-id="${escapeAttr(p.id)}">
+              <a href="${escapeAttr(p.url)}">Loading...</a>
             </div>
           </div>`;
       }
@@ -24,18 +22,18 @@ document.addEventListener('DOMContentLoaded', () => {
       return `
         <div class="gumroad-card work-card">
           <div class="work-card__thumb">GR</div>
-          <h3>${p.title}</h3>
-          <p class="i18n" data-en="${escapeAttr(p.descEn)}">${p.desc || ''}</p>
+          <h3 ${attrsIdioma(p.titulo)}>${escapeHTML(textoES(p.titulo))}</h3>
+          <p ${attrsIdioma(p.desc)}>${escapeHTML(textoES(p.desc))}</p>
         </div>`;
     }).join('');
   }
 
-  // Flechas de la tira de Gumroad (misma idea que las de la tira de shorts)
+  // Flechas de la tira (misma idea que las de la tira de shorts)
   document.getElementById('gumroad-nav-prev')?.addEventListener('click', () => {
-    gumroadGrid?.scrollBy({ left: -300, behavior: 'smooth' });
+    tira?.scrollBy({ left: -300, behavior: 'smooth' });
   });
   document.getElementById('gumroad-nav-next')?.addEventListener('click', () => {
-    gumroadGrid?.scrollBy({ left: 300, behavior: 'smooth' });
+    tira?.scrollBy({ left: 300, behavior: 'smooth' });
   });
 
 });

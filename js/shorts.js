@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ---- Tarjetas (dobladas para el loop infinito) ----
   const shortsTrackEl = document.getElementById('shorts-track');
-  if (shortsTrackEl && hasVideos && Array.isArray(VIDEOS.shorts)) {
+  if (shortsTrackEl && hayVideos && Array.isArray(VIDEOS.shorts)) {
     const ids = VIDEOS.shorts.filter(Boolean);
 
     const cardHTML = (id, isDuplicate) => `
