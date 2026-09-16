@@ -19,7 +19,7 @@ const COMPETENCIAS = [
 
   {
     titulo: "Software",
-    tags: ["Maya", "Unreal Engine"]
+    tags: ["Maya", "Unreal Engine", "Substance Painter", "Nuke", "Unity"]
   },
 
   {

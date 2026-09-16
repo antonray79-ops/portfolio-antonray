@@ -4,20 +4,70 @@
 // ------------------------------------------------------------
 // La tira acepta clips horizontales (spots, 16:9) y verticales
 // (shorts, 9:16) mezclados; cada tarjeta lleva su título debajo.
-// Mismo lenguaje visual que la tira de Shorts (arrastrar +
-// flechas + reproductor que se abre arriba), pero sin auto-scroll
-// — aquí son pocos clips curados — y el reproductor cambia de
-// forma según la orientación del clip que se abrió.
+// Los cuadritos de marca muestran el logo si contenido/clientes.js
+// trae uno, y si no (o si el archivo no carga) muestran el nombre.
 // ============================================================
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  // ---- Cuadrícula de marcas ----
-  const grid = document.querySelector('.clients__grid');
-  if (grid && hayClientes && Array.isArray(CLIENTES.marcas)) {
-    grid.innerHTML = CLIENTES.marcas
-      .map((marca) => `<div class="client-chip" ${attrsIdioma(marca)}>${escapeHTML(textoES(marca))}</div>`)
-      .join('');
+  // ---- Muro de marcas: desfile continuo ----
+  // Se arman DOS mitades idénticas y el CSS recorre exactamente el ancho
+  // de una; cuando la animación reinicia, el cuadro es idéntico al
+  // anterior, así que el loop no se nota.
+  const muro = document.getElementById('clients-logos');
+  if (muro && hayClientes && Array.isArray(CLIENTES.marcas)) {
+
+    const marcaHTML = (m) => {
+      // Acepta tanto { nombre: "..." } como el formato viejo de solo texto.
+      const marca = (m && typeof m === 'object') ? m : { nombre: m };
+      const nombre = textoES(marca.nombre);
+
+      if (marca.logo) {
+        const clase = marca.color ? 'client-chip__logo client-chip__logo--color' : 'client-chip__logo';
+        return `
+          <div class="client-chip client-chip--logo">
+            <img class="${clase}" src="assets/logos/${escapeAttr(marca.logo)}" alt="${escapeAttr(nombre)}">
+          </div>`;
+      }
+
+      return `<div class="client-chip" ${attrsIdioma(marca.nombre)}>${escapeHTML(nombre)}</div>`;
+    };
+
+    const grupo = CLIENTES.marcas.map(marcaHTML).join('');
+    muro.innerHTML = `<div class="clients__logos-track"><div class="clients__logos-half">${grupo}</div></div>`;
+
+    const track = muro.querySelector('.clients__logos-track');
+    const mitad = muro.querySelector('.clients__logos-half');
+
+    // Con pocas marcas la tira sería más angosta que la pantalla y se vería
+    // el hueco al dar la vuelta: se repite el grupo hasta que sobre ancho.
+    const anchoObjetivo = Math.max(muro.clientWidth, window.innerWidth) * 1.5;
+    let vueltas = 1;
+    while (mitad.scrollWidth < anchoObjetivo && vueltas < 12) {
+      mitad.insertAdjacentHTML('beforeend', grupo);
+      vueltas++;
+    }
+
+    // La segunda mitad es la copia exacta que hace posible el loop.
+    const copia = mitad.cloneNode(true);
+    copia.setAttribute('aria-hidden', 'true');
+    track.appendChild(copia);
+
+    // Velocidad pareja (~55 px por segundo) sin importar cuántas marcas haya.
+    track.style.animationDuration = Math.max(20, Math.round(mitad.scrollWidth / 55)) + 's';
+
+    // Si un logo no carga (archivo que no existe o nombre mal escrito), esa
+    // marca se cae de vuelta a su nombre escrito en vez de dejar la imagen rota.
+    muro.querySelectorAll('.client-chip__logo').forEach((img) => {
+      img.addEventListener('error', () => {
+        const chip = img.closest('.client-chip');
+        if (!chip) return;
+        const nombre = img.getAttribute('alt') || '';
+        chip.classList.remove('client-chip--logo');
+        chip.textContent = nombre;
+        console.warn(`No cargó el logo de "${nombre}" (assets/logos/) — se muestra el nombre. Revisa que el archivo exista y que el nombre esté bien escrito en contenido/clientes.js`);
+      });
+    });
   }
 
   // ---- Tira de videos ----

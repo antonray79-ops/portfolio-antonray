@@ -1,5 +1,5 @@
 /* ============================================================
-   CLIENTES — tira de videos por marca + grid de marcas
+   CLIENTES — tira de videos por marca + cuadrícula de marcas
    ============================================================ */
 
 /* ---- Reproductor destacado (se abre arriba de la tira) ----
@@ -53,7 +53,7 @@
 }
 .clients__player-close:hover { color: var(--cyan); border-color: var(--cyan); }
 
-/* ---- Tira horizontal (VIDEOS.clientes) ---- */
+/* ---- Tira horizontal (CLIENTES.videos) ---- */
 .clients__wrap { position: relative; margin-bottom: 40px; }
 
 .clients__track-mask {
@@ -159,27 +159,88 @@
   .clients__nav--prev, .clients__nav--next { display: none; }
 }
 
-.clients__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1px;
-  background: var(--panel-line);
-  border: 1px solid var(--panel-line);
+/* ---- Muro de marcas: desfile continuo (CLIENTES.marcas) ----
+   La tira avanza sola en loop infinito. El truco: js/clientes.js arma
+   DOS mitades idénticas, y la animación recorre exactamente el ancho de
+   una (-50%); al terminar, el salto de vuelta cae en un punto idéntico
+   al actual, así que no se ve corte. La velocidad la calcula el JS según
+   qué tan larga quedó la tira, para que siempre avance a los mismos
+   píxeles por segundo sin importar cuántas marcas haya. */
+.clients__logos {
+  position: relative;
+  overflow: hidden;
+  padding: 18px 0;
+  border-top: 1px solid var(--panel-line);
+  border-bottom: 1px solid var(--panel-line);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 90px, black calc(100% - 90px), transparent);
+  mask-image: linear-gradient(to right, transparent, black 90px, black calc(100% - 90px), transparent);
 }
+.clients__logos-track {
+  display: flex;
+  width: max-content;
+  animation: desfileMarcas 40s linear infinite;
+}
+.clients__logos-half { display: flex; align-items: center; }
+
+/* Al pasar el mouse se detiene, para que se alcance a leer la marca */
+.clients__logos:hover .clients__logos-track { animation-play-state: paused; }
+
+@keyframes desfileMarcas {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* Cada marca ya no es un cuadrito con borde: en una tira en movimiento
+   las cajas se ven pesadas, los logos sueltos se ven mejor. */
 .client-chip {
-  background: var(--black);
-  padding: 32px 20px;
+  flex: 0 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
+  padding: 0 40px;
+  white-space: nowrap;
   font-family: var(--font-mono);
   font-size: 14px;
   letter-spacing: 0.04em;
   color: var(--text-faint);
-  transition: color 0.3s var(--ease), background 0.3s var(--ease);
+  transition: color 0.3s var(--ease);
 }
-.client-chip:hover {
-  color: var(--cyan);
-  background: rgba(94,230,230,0.04);
+.client-chip:hover { color: var(--cyan); }
+
+/* Si alguien prefiere menos movimiento (ajuste del sistema), la tira se
+   queda quieta y se puede recorrer a mano. */
+@media (prefers-reduced-motion: reduce) {
+  .clients__logos { overflow-x: auto; }
+  .clients__logos-track { animation: none; }
+}
+
+/* Cuadrito con logo en vez de nombre.
+   Los logos se pintan de blanco (brightness(0) los aplana a negro
+   conservando la transparencia, invert(1) los vuelve blancos), así
+   todos se ven parejos aunque los archivos vengan de colores
+   distintos. Con color: true en contenido/clientes.js se saltan
+   ese tratamiento y salen con sus colores originales. */
+/* Los archivos de assets/logos/ vienen todos en un lienzo parejo de 3:1
+   con el logo centrado, así que basta con darles el mismo ancho para que
+   queden ópticamente alineados entre sí, sin importar si la marca es un
+   texto largo (HONDA) o una marca compacta (Volaris). */
+.client-chip__logo {
+  width: 150px;
+  height: 50px;
+  object-fit: contain;
+  filter: grayscale(1) brightness(0) invert(1);
+  opacity: 0.5;
+  transition: opacity 0.3s var(--ease);
+}
+.client-chip:hover .client-chip__logo { opacity: 1; }
+.client-chip__logo--color { filter: none; opacity: 0.8; }
+
+@media (max-width: 600px) {
+  .clients__logos {
+    padding: 14px 0;
+    -webkit-mask-image: linear-gradient(to right, transparent, black 40px, black calc(100% - 40px), transparent);
+    mask-image: linear-gradient(to right, transparent, black 40px, black calc(100% - 40px), transparent);
+  }
+  .client-chip { padding: 0 26px; font-size: 13px; }
+  .client-chip__logo { width: 112px; height: 38px; }
 }

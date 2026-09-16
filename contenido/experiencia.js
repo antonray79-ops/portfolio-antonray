@@ -56,7 +56,7 @@ const EXPERIENCIA = {
     {
       etiqueta: "MBA",
       titulo: { es: "Maestría en Administración de Negocios", en: "Master of Business Administration" },
-      escuela: ""
+      escuela: "Universidad del Valle de México"
     },
 
     {
