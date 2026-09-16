@@ -3,8 +3,10 @@
    ============================================================ */
 
 .contact {
-  padding-top: 100px;
-  padding-bottom: 60px;
+  /* Un poco más de aire que entre secciones normales: es el cierre de la
+     página y ayuda a que se sienta como final, no como una sección más. */
+  padding-top: 80px;
+  padding-bottom: 56px;
   background: linear-gradient(to bottom, transparent, rgba(94,230,230,0.03));
 }
 .contact__headline {
