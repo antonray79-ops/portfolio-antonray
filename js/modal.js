@@ -38,7 +38,10 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.open-reel-modal').forEach((link) => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
-      openReelModal();
+      // data-reel="spots" abre el reel de spots; sin data-reel (o "rigging")
+      // abre el reel principal, como siempre.
+      const cual = link.dataset.reel === 'spots' ? 'reelSpots' : 'reel';
+      openReelModal(hayVideos && VIDEOS[cual] && VIDEOS[cual].id);
       closeMobileNav();
     });
   });

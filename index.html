@@ -86,9 +86,16 @@
     <p class="hero__alias" data-txt="hero_alias"></p>
     <h2 class="hero__title" data-txt="hero_puesto" data-puntos></h2>
     <p class="hero__tagline" data-txt="hero_tagline"></p>
-    <a href="#reel" class="btn btn--primary open-reel-modal">
-      <span class="btn__icon">▶</span> <span data-txt="hero_boton_reel"></span>
-    </a>
+    <!-- Dos reels, mismo peso visual: cada visitante entra por el suyo.
+         data-reel dice cuál video abre (ver js/modal.js y contenido/videos.js) -->
+    <div class="hero__ctas">
+      <a href="#reel" class="btn btn--primary open-reel-modal" data-reel="rigging">
+        <span class="btn__icon">▶</span> <span data-txt="hero_boton_reel"></span>
+      </a>
+      <a href="#reel" class="btn btn--primary open-reel-modal" data-reel="spots">
+        <span class="btn__icon">▶</span> <span data-txt="hero_boton_spots"></span>
+      </a>
+    </div>
 
     <div class="hero__quicklinks">
       <a href="#reels" data-tab="rigging" class="hero__quicklink" data-txt="hero_quick_rigging"></a>

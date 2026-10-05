@@ -15,9 +15,16 @@
 const VIDEOS = {
 
   // ---- Reel principal ----------------------------------------
-  // El video que abre el botón "Ver Reel" del hero.
+  // El video que abre el primer botón del hero (Reel de Rigging)
+  // y el "Rigging" del menú.
   reel: {
     id: "hp48qOfm4yo" // https://youtu.be/hp48qOfm4yo
+  },
+
+  // El video que abre el segundo botón del hero (Reel de Spots).
+  // Es el mismo de la tira de Clientes; si lo cambias allá, cámbialo aquí también.
+  reelSpots: {
+    id: "6M0dyRBKo3w" // https://youtu.be/6M0dyRBKo3w
   },
 
   // ---- Tira de Clips (shorts) --------------------------------

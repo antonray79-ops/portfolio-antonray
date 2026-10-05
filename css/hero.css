@@ -76,6 +76,18 @@
   line-height: 1.6;
 }
 
+/* Los dos botones de reel: lado a lado, y uno sobre otro si no caben */
+.hero__ctas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+}
+/* En celular quedan apilados: mismo ancho para que no se vean chuecos */
+@media (max-width: 600px) {
+  .hero__ctas .btn { width: 240px; justify-content: center; }
+}
+
 .hero__quicklinks {
   display: flex;
   flex-wrap: wrap;
