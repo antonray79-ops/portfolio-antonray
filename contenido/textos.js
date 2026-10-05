@@ -20,6 +20,7 @@ const TEXTOS = {
   // ---- Menú de arriba ----------------------------------------
   nav_reels:      { es: "Reels",          en: "Reels" },
   nav_rigging:    { es: "Rigging",        en: "Rigging" },
+  nav_spots:      { es: "Spots",          en: "Commercials" },
   nav_scripting:  { es: "Scripting",      en: "Scripting" },
   nav_mocap:      { es: "Motion Capture", en: "Motion Capture" },
   nav_store:      { es: "Tienda",         en: "Store" },
@@ -42,7 +43,7 @@ const TEXTOS = {
     en: "10+ years bringing characters to life across film, TV, games, and virtual production — from the first meeting to the final render."
   },
   hero_boton_reel:    { es: "Reel de Rigging", en: "Rigging Reel" },
-  hero_boton_spots:   { es: "Reel de Spots",   en: "Commercial Spots Reel" },
+  hero_boton_spots:   { es: "Reel de Spots",   en: "Commercial Reel" },
   hero_quick_rigging: { es: "Rigging",        en: "Rigging" },
   hero_quick_script:  { es: "Scripting",      en: "Scripting" },
   hero_quick_mocap:   { es: "Motion Capture", en: "Motion Capture" },

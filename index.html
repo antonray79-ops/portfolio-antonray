@@ -50,6 +50,7 @@
       <a href="#reels" class="nav-dropdown__trigger"><span data-txt="nav_reels"></span> <span class="nav-dropdown__caret">▾</span></a>
       <div class="nav-dropdown__menu">
         <a href="#reel" class="open-reel-modal" data-txt="nav_rigging"></a>
+        <a href="#reel" class="open-reel-modal" data-reel="spots" data-txt="nav_spots"></a>
         <a href="#reels" data-tab="scripting" data-txt="nav_scripting"></a>
         <a href="#reels" data-tab="mocap" data-txt="nav_mocap"></a>
       </div>
@@ -220,7 +221,12 @@
   </div>
 </footer>
 
-<!-- Ventana del reel — la abre "Ver Reel" del hero y "Rigging" del menú -->
+<!-- Botón flotante "volver arriba" — aparece al bajar de la primera
+     pantalla (ver js/nav.js y css/nav.css) -->
+<a href="#hero" class="volver-arriba" id="volver-arriba" aria-label="Volver arriba / Back to top">↑</a>
+
+<!-- Ventana del reel — la abren los botones de reel del hero y
+     "Rigging" / "Spots" del menú Reels -->
 <div class="reel-modal" id="reel-modal">
   <div class="reel-modal__backdrop" id="reel-modal-backdrop"></div>
   <div class="reel-modal__frame">

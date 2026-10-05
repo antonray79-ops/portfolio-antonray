@@ -10,7 +10,10 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 0 24px;
+  /* Arriba deja libre la barra del menú y abajo el "SCROLL", para que en
+     pantallas bajitas (laptops de 768–800px) el texto no se encime con
+     los botones: si no cabe, el hero crece en vez de amontonarse. */
+  padding: 96px 24px 120px;
   background:
     radial-gradient(ellipse 80% 60% at 50% 30%, rgba(94,230,230,0.06), transparent 60%),
     radial-gradient(ellipse 60% 50% at 50% 90%, rgba(255,180,84,0.05), transparent 60%),
@@ -83,10 +86,9 @@
   justify-content: center;
   gap: 14px;
 }
-/* En celular quedan apilados: mismo ancho para que no se vean chuecos */
-@media (max-width: 600px) {
-  .hero__ctas .btn { width: 240px; justify-content: center; }
-}
+/* Mismo ancho los dos, para que se lean como par y no como
+   "uno principal y otro de relleno" */
+.hero__ctas .btn { width: 250px; justify-content: center; }
 
 .hero__quicklinks {
   display: flex;

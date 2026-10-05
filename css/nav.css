@@ -202,3 +202,42 @@
   }
   .nav-dropdown__menu a { padding: 10px 0; }
 }
+
+/* ---------- Botón flotante "volver arriba" ----------
+   Escondido en la primera pantalla; js/nav.js le pone .is-visible
+   cuando ya bajaste. Mismo lenguaje que el resto: cuadrado, borde fino,
+   se enciende en cyan al pasar el mouse. z-index debajo del modal del
+   reel (300) para que no se encime sobre el video. */
+.volver-arriba {
+  position: fixed;
+  right: 28px;
+  bottom: 28px;
+  z-index: 90;
+  width: 46px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 18px;
+  color: var(--cyan);
+  border: 1px solid var(--panel-line);
+  border-radius: 2px;
+  background: rgba(6,6,7,0.75);
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+  transition: opacity 0.3s var(--ease), transform 0.3s var(--ease),
+              background 0.25s var(--ease), color 0.25s var(--ease), border-color 0.25s var(--ease);
+}
+.volver-arriba.is-visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.volver-arriba:hover {
+  background: var(--cyan);
+  border-color: var(--cyan);
+  color: var(--black);
+  box-shadow: 0 0 20px rgba(94,230,230,0.3);
+}
+@media (max-width: 600px) {
+  .volver-arriba { right: 16px; bottom: 16px; width: 42px; height: 42px; }
+}
