@@ -48,7 +48,8 @@ const VIDEOS = {
   reels: {
     rigging:   "uUSTvOocdVQ", // https://youtu.be/uUSTvOocdVQ
     scripting: "RCbAVlhtBRE", // https://youtu.be/RCbAVlhtBRE
-    mocap:     "DXeYSTxG2D0"  // https://youtu.be/DXeYSTxG2D0
+    mocap:     "DXeYSTxG2D0", // https://youtu.be/DXeYSTxG2D0
+    xr:        "A88XAJgRDBg"  // https://youtu.be/A88XAJgRDBg — demo de apps VR / AR
   },
 
   // ---- Breakdowns de cada pestaña ----------------------------
@@ -73,6 +74,10 @@ const VIDEOS = {
 
     mocap: [
       // { id: "idDelVideo", titulo: "FaceClean — Breakdown" },
+    ],
+
+    xr: [
+      // { id: "idDelVideo", titulo: "Honda — App de AR" },
     ]
 
   }

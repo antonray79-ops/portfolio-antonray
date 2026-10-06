@@ -63,6 +63,10 @@ const TRABAJOS = {
     //     en: "Standalone facial mocap cleanup and retargeting app — video → MediaPipe → ARKit CSV pipeline."
     //   }
     // },
+  ],
+
+  xr: [
+    // Apps de VR / AR — por ahora solo el demo de arriba (videos.js)
   ]
 
 };

@@ -23,6 +23,7 @@ const TEXTOS = {
   nav_spots:      { es: "Spots",          en: "Commercials" },
   nav_scripting:  { es: "Scripting",      en: "Scripting" },
   nav_mocap:      { es: "Motion Capture", en: "Motion Capture" },
+  nav_xr:         { es: "Apps VR / AR",   en: "VR / AR Apps" },
   nav_store:      { es: "Tienda",         en: "Store" },
   nav_clients:    { es: "Clientes",       en: "Clients" },
   nav_experience: { es: "Experiencia",    en: "Experience" },
@@ -47,6 +48,7 @@ const TEXTOS = {
   hero_quick_rigging: { es: "Rigging",        en: "Rigging" },
   hero_quick_script:  { es: "Scripting",      en: "Scripting" },
   hero_quick_mocap:   { es: "Motion Capture", en: "Motion Capture" },
+  hero_quick_xr:      { es: "Apps VR / AR",   en: "VR / AR Apps" },
   hero_scroll:        { es: "SCROLL",         en: "SCROLL" },
 
   // ---- Encabezados de cada sección ---------------------------
@@ -65,6 +67,7 @@ const TEXTOS = {
   tab_rigging:   { es: "Rigging",        en: "Rigging" },
   tab_scripting: { es: "Scripting",      en: "Scripting" },
   tab_mocap:     { es: "Motion Capture", en: "Motion Capture" },
+  tab_xr:        { es: "Apps VR / AR",   en: "VR / AR Apps" },
 
   // ---- Ligas sueltas -----------------------------------------
   shorts_more: { es: "Más clips en YouTube ↗",    en: "More clips on YouTube ↗" },
