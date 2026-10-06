@@ -60,6 +60,27 @@
   margin-bottom: 28px;
 }
 
+/* Desvanecido en las orillas de la tira. Va como capa ENCIMA (en el
+   contenedor que no se mueve) y no como mask-image en la tira misma:
+   en iPhone, una máscara sobre algo que se desliza hace que Safari no
+   alcance a pintar al hacer swipe rápido y la tira se ve en negro. */
+.shorts__wrap::before,
+.shorts__wrap::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 40px;
+  z-index: 3;
+  pointer-events: none;
+}
+.shorts__wrap::before { left: -40px; background: linear-gradient(to right, var(--black), transparent); }
+.shorts__wrap::after  { right: -40px; background: linear-gradient(to left, var(--black), transparent); }
+@media (max-width: 600px) {
+  .shorts__wrap::before { left: -20px; width: 24px; }
+  .shorts__wrap::after  { right: -20px; width: 24px; }
+}
+
 .shorts__marquee {
   overflow-x: auto;
   overflow-y: hidden;
@@ -67,8 +88,7 @@
   padding: 4px 40px;
   cursor: grab;
   scroll-behavior: auto;
-  -webkit-mask-image: linear-gradient(to right, transparent, black 40px, black calc(100% - 40px), transparent);
-  mask-image: linear-gradient(to right, transparent, black 40px, black calc(100% - 40px), transparent);
+  -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
@@ -123,8 +143,9 @@
   border-radius: 50%;
   color: var(--amber);
   font-size: 12px;
-  background: rgba(6,6,7,0.55);
-  backdrop-filter: blur(3px);
+  /* Sin backdrop-filter: dentro de una tira que se desliza, 18 desenfoques
+     en vivo son demasiado para el iPhone. Un fondo más oscuro se ve igual. */
+  background: rgba(6,6,7,0.7);
   transition: background 0.25s var(--ease), color 0.25s var(--ease);
   pointer-events: none;
 }
@@ -159,6 +180,7 @@
 
 @media (max-width: 600px) {
   .shorts__nav { display: none; }
+  .shorts__marquee { margin: 0 -20px; padding: 4px 20px; }
 }
 
 .shorts__more {

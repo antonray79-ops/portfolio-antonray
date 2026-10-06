@@ -6,6 +6,27 @@
    para que en móvil no se apilen embeds gigantes uno tras otro */
 .gumroad-strip { position: relative; margin-bottom: 32px; }
 
+/* Desvanecido en las orillas de la tira. Va como capa ENCIMA (en el
+   contenedor que no se mueve) y no como mask-image en la tira misma:
+   en iPhone, una máscara sobre algo que se desliza hace que Safari no
+   alcance a pintar al hacer swipe rápido y la tira se ve en negro. */
+.gumroad-strip::before,
+.gumroad-strip::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 40px;
+  z-index: 3;
+  pointer-events: none;
+}
+.gumroad-strip::before { left: -40px; background: linear-gradient(to right, var(--black), transparent); }
+.gumroad-strip::after  { right: -40px; background: linear-gradient(to left, var(--black), transparent); }
+@media (max-width: 600px) {
+  .gumroad-strip::before { left: -20px; width: 24px; }
+  .gumroad-strip::after  { right: -20px; width: 24px; }
+}
+
 .gumroad-track {
   display: flex;
   gap: 18px;
@@ -14,8 +35,7 @@
   scroll-snap-type: x proximity;
   margin: 0 -40px;
   padding: 4px 40px 14px;
-  -webkit-mask-image: linear-gradient(to right, transparent, black 40px, black calc(100% - 40px), transparent);
-  mask-image: linear-gradient(to right, transparent, black 40px, black calc(100% - 40px), transparent);
+  -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
@@ -47,4 +67,8 @@
 
 @media (max-width: 600px) {
   .gumroad-nav--prev, .gumroad-nav--next { display: none; }
+}
+
+@media (max-width: 600px) {
+  .gumroad-track { margin: 0 -20px; padding: 4px 20px 14px; }
 }

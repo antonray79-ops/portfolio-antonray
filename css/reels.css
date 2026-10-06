@@ -147,8 +147,7 @@
   border-radius: 50%;
   color: var(--cyan);
   font-size: 12px;
-  background: rgba(6,6,7,0.55);
-  backdrop-filter: blur(3px);
+  background: rgba(6,6,7,0.7);
   pointer-events: none;
   transition: background 0.25s var(--ease), color 0.25s var(--ease);
 }
@@ -176,8 +175,6 @@
     margin: 0 -20px 32px;
     padding: 4px 20px 10px;
     scroll-snap-type: x proximity;
-    -webkit-mask-image: linear-gradient(to right, transparent, black 20px, black calc(100% - 20px), transparent);
-    mask-image: linear-gradient(to right, transparent, black 20px, black calc(100% - 20px), transparent);
     scrollbar-width: none;
     -ms-overflow-style: none;
   }

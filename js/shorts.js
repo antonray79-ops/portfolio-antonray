@@ -35,6 +35,12 @@ document.addEventListener('DOMContentLoaded', () => {
     let startX = 0;
     let startScroll = 0;
     let isPlayerOpen = false;
+    // true mientras la persona está deslizando la tira con el dedo/rueda,
+    // INCLUYENDO la inercia de iOS después de soltar. Mientras dure, ni el
+    // auto-scroll ni el salto del loop tocan scrollLeft: en iPhone, mover
+    // scrollLeft a media inercia es lo que dejaba la tira en negro.
+    let userScrolling = false;
+    let idleTimer = null;
 
     function half() {
       return track.scrollWidth / 2;
@@ -59,13 +65,21 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!prefersReducedMotion) {
       let lastTs = null;
       const pxPerSecond = 26;
+      // Posición con decimales: a 26 px/s cada cuadro avanza menos de un
+      // pixel, y el navegador (sobre todo en iPhone) redondea scrollLeft y
+      // se tragaba el avance — la tira casi no se movía sola.
+      let pos = marquee.scrollLeft;
       function tick(ts) {
         if (lastTs === null) lastTs = ts;
-        const dt = (ts - lastTs) / 1000;
+        const dt = Math.min((ts - lastTs) / 1000, 0.1);
         lastTs = ts;
-        if (!autoPaused && !isPointerDown && !isPlayerOpen) {
-          marquee.scrollLeft += pxPerSecond * dt;
-          wrapScroll();
+        if (!autoPaused && !isPointerDown && !isPlayerOpen && !userScrolling) {
+          // Si alguien la movió a mano, seguir desde donde la dejó
+          if (Math.abs(marquee.scrollLeft - pos) > 2) pos = marquee.scrollLeft;
+          pos += pxPerSecond * dt;
+          const h = half();
+          if (h > 0 && pos >= h) pos -= h;
+          marquee.scrollLeft = pos;
         }
         requestAnimationFrame(tick);
       }
@@ -76,8 +90,23 @@ document.addEventListener('DOMContentLoaded', () => {
     marquee.addEventListener('mouseleave', () => {
       if (!isPointerDown && !isPlayerOpen) autoPaused = false;
     });
-    marquee.addEventListener('wheel', pauseAutoTemporarily, { passive: true });
-    marquee.addEventListener('scroll', wrapScroll, { passive: true });
+    function startUserScroll() {
+      userScrolling = true;
+      pauseAutoTemporarily();
+    }
+    marquee.addEventListener('wheel', startUserScroll, { passive: true });
+
+    marquee.addEventListener('scroll', () => {
+      if (!userScrolling) { wrapScroll(); return; }
+      // Sigue moviéndose (dedo o inercia): mantener el auto-scroll en pausa
+      // y esperar a que la tira se quede quieta para acomodar el loop.
+      pauseAutoTemporarily();
+      clearTimeout(idleTimer);
+      idleTimer = setTimeout(() => {
+        userScrolling = false;
+        wrapScroll();
+      }, 180);
+    }, { passive: true });
 
     // Drag-to-scroll — plain mouse events, no pointer capture (capture can
     // swallow the click on the button underneath in some browsers, which
@@ -116,6 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
       isPointerDown = true;
       startX = t.clientX;
       startScroll = marquee.scrollLeft;
+      startUserScroll();
     }, { passive: true });
     marquee.addEventListener('touchmove', () => {
       // native scrolling handles the movement; endDrag() below still runs

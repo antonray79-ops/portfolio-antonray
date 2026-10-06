@@ -56,14 +56,34 @@
 /* ---- Tira horizontal (CLIENTES.videos) ---- */
 .clients__wrap { position: relative; margin-bottom: 40px; }
 
+/* Desvanecido en las orillas de la tira. Va como capa ENCIMA (en el
+   contenedor que no se mueve) y no como mask-image en la tira misma:
+   en iPhone, una máscara sobre algo que se desliza hace que Safari no
+   alcance a pintar al hacer swipe rápido y la tira se ve en negro. */
+.clients__wrap::before,
+.clients__wrap::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 40px;
+  z-index: 3;
+  pointer-events: none;
+}
+.clients__wrap::before { left: -40px; background: linear-gradient(to right, var(--black), transparent); }
+.clients__wrap::after  { right: -40px; background: linear-gradient(to left, var(--black), transparent); }
+@media (max-width: 600px) {
+  .clients__wrap::before { left: -20px; width: 24px; }
+  .clients__wrap::after  { right: -20px; width: 24px; }
+}
+
 .clients__track-mask {
   overflow-x: auto;
   overflow-y: hidden;
   margin: 0 -40px;
   padding: 4px 40px 6px;
   cursor: grab;
-  -webkit-mask-image: linear-gradient(to right, transparent, black 40px, black calc(100% - 40px), transparent);
-  mask-image: linear-gradient(to right, transparent, black 40px, black calc(100% - 40px), transparent);
+  -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
@@ -127,8 +147,7 @@
   border-radius: 50%;
   color: var(--cyan);
   font-size: 12px;
-  background: rgba(6,6,7,0.55);
-  backdrop-filter: blur(3px);
+  background: rgba(6,6,7,0.7);
   pointer-events: none;
   transition: background 0.25s var(--ease), color 0.25s var(--ease);
 }
@@ -157,6 +176,7 @@
 
 @media (max-width: 600px) {
   .clients__nav--prev, .clients__nav--next { display: none; }
+  .clients__track-mask { margin: 0 -20px; padding: 4px 20px 6px; }
 }
 
 /* ---- Muro de marcas: desfile continuo (CLIENTES.marcas) ----
