@@ -67,6 +67,7 @@ const VIDEOS = {
     ],
 
     scripting: [
+      { id: "1ftUNxuw67A", titulo: "FaceClean — Demo" },                                              // https://youtu.be/1ftUNxuw67A
       { id: "0jXV3S4JmKc", titulo: "FacialPoseBuilder — How To Use" },                                // https://youtu.be/0jXV3S4JmKc
       { id: "Xx6XWnbGFnM", titulo: "Finger Retargeter v1.0 — Retarget Mocap Fingers to Rig Controls" }, // https://youtu.be/Xx6XWnbGFnM
       { id: "AGLhBjdmCzk", titulo: "FaceCSVPlayer — Install & Use Guide" },                            // https://youtu.be/AGLhBjdmCzk
